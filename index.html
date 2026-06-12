@@ -1,156 +1,133 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Heladerías 🍦</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Heladerías & Burgers 🍦🍔</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #ffffff; --bg2: #f5f5f4; --bg3: #efefed;
-    --text: #1a1a18; --text2: #6b6b66; --text3: #a0a09a;
-    --border: rgba(0,0,0,.12); --border2: rgba(0,0,0,.22);
-    --radius-md: 8px; --radius-lg: 12px;
-    --star-on: #E9902A; --star-off: #d0d0cc;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1e1e1c; --bg2: #2a2a27; --bg3: #323230;
-      --text: #f0efe8; --text2: #a0a09a; --text3: #6b6b66;
-      --border: rgba(255,255,255,.12); --border2: rgba(255,255,255,.22);
-      --star-off: #555;
-    }
-  }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg3); color: var(--text); min-height: 100vh; padding: 1rem; }
-  .app { max-width: 680px; margin: 0 auto; }
-  .header { text-align: center; padding: 2rem 0 1.5rem; }
-  .header-icon { font-size: 48px; line-height: 1; margin-bottom: 10px; }
-  .header h1 { font-size: 26px; font-weight: 600; }
-  .header p { font-size: 15px; color: var(--text2); margin-top: 5px; }
-  .loading { text-align: center; padding: 3rem 0; color: var(--text2); font-size: 15px; }
-  .spinner { display: inline-block; width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: #D4537E; border-radius: 50%; animation: spin .7s linear infinite; margin-bottom: 12px; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .names-row { display: flex; gap: 10px; margin: 1.25rem 0; }
-  .nfield { flex: 1; display: flex; align-items: center; gap: 9px; background: var(--bg); border-radius: var(--radius-md); padding: 8px 13px; border: 0.5px solid var(--border); }
-  .nfield input { border: none; background: transparent; font-size: 14px; font-weight: 500; color: var(--text); width: 100%; outline: none; }
-  .av { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
-  .av1 { background: #FBEAF0; color: #993556; }
-  .av2 { background: #E6F1FB; color: #185FA5; }
-  .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 1.25rem; }
-  .stat { background: var(--bg); border-radius: var(--radius-md); padding: 12px; text-align: center; border: 0.5px solid var(--border); }
-  .stat-num { font-size: 22px; font-weight: 600; }
-  .stat-lbl { font-size: 12px; color: var(--text2); margin-top: 2px; }
-  .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-  .sec-title { font-size: 17px; font-weight: 600; }
-  .sort-sel { font-size: 13px; padding: 6px 10px; border-radius: var(--radius-md); border: 0.5px solid var(--border); background: var(--bg); color: var(--text); cursor: pointer; }
-  .shop-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1rem; transition: border-color .15s; }
-  .shop-card:hover { border-color: var(--border2); }
-  .shop-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; gap: 12px; }
-  .shop-info { flex: 1; min-width: 0; }
-  .shop-name { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-  .shop-addr { font-size: 13px; color: var(--text2); margin-top: 3px; display: flex; align-items: center; gap: 4px; }
-  .shop-ratings { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; flex-shrink: 0; }
-  .duo-row { display: flex; align-items: center; gap: 7px; }
-  .duo-lbl { font-size: 11px; font-weight: 500; min-width: 58px; text-align: right; white-space: nowrap; }
-  .stars-inline { display: flex; gap: 2px; }
-  .star { font-size: 15px; cursor: pointer; color: var(--star-off); transition: transform .1s; line-height: 1; }
-  .star:hover { transform: scale(1.2); }
-  .star.on { color: var(--star-on); }
-  .prom-badge { font-size: 12px; font-weight: 500; padding: 3px 8px; border-radius: 12px; }
-  .prom-both { background: #EAF3DE; color: #3B6D11; }
-  .prom-one { background: var(--bg2); color: var(--text2); }
-  .disagree-tag { font-size: 11px; background: #FAEEDA; color: #854F0B; padding: 2px 7px; border-radius: 10px; }
-  .fl-section-title { font-size: 12px; font-weight: 500; color: var(--text2); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .5px; }
-  .flavor-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
-  .flavor-row { display: flex; align-items: center; gap: 8px; padding: 8px 11px; border-radius: var(--radius-md); border: 0.5px solid transparent; flex-wrap: wrap; }
-  .flavor-name { flex: 1; font-size: 13px; font-weight: 500; min-width: 80px; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
-  .flavor-scores { display: flex; gap: 12px; align-items: center; flex-shrink: 0; }
-  .p-score { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-  .p-score-lbl { font-size: 10px; font-weight: 600; }
-  .p-score-stars { display: flex; gap: 1px; }
-  .psc-star { font-size: 14px; cursor: pointer; color: var(--star-off); transition: transform .1s; line-height: 1; }
-  .psc-star:hover { transform: scale(1.15); }
-  .psc-star.on { color: var(--star-on); }
-  .fl-avg { font-size: 12px; font-weight: 500; min-width: 38px; text-align: center; }
-  .add-fl-row { display: flex; gap: 6px; margin-bottom: 10px; }
-  .add-fl-row input { flex: 1; font-size: 13px; padding: 7px 10px; border-radius: var(--radius-md); border: 0.5px solid var(--border); background: var(--bg2); color: var(--text); outline: none; }
-  .add-fl-row input::placeholder { color: var(--text3); }
-  .btn-icon { padding: 7px 13px; font-size: 13px; border-radius: var(--radius-md); border: 0.5px solid var(--border2); background: transparent; color: var(--text); cursor: pointer; }
-  .btn-icon:hover { background: var(--bg2); }
-  .shop-foot { display: flex; justify-content: flex-end; }
-  .btn-del { padding: 5px 12px; font-size: 13px; border-radius: var(--radius-md); border: 0.5px solid var(--border); background: transparent; color: var(--text2); cursor: pointer; }
-  .btn-del:hover { background: #fde8e8; color: #a32d2d; border-color: #f09595; }
-  .add-section { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; margin-top: 1rem; }
-  .add-title { font-size: 15px; font-weight: 600; margin-bottom: 13px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-  .ff { display: flex; flex-direction: column; gap: 4px; }
-  .ff label { font-size: 12px; color: var(--text2); font-weight: 500; }
-  .ff input { font-size: 13px; padding: 8px 10px; border-radius: var(--radius-md); border: 0.5px solid var(--border); background: var(--bg2); color: var(--text); outline: none; }
-  .ff input::placeholder { color: var(--text3); }
-  .ff.full { grid-column: 1 / -1; }
-  .btn-primary { padding: 9px 20px; font-size: 14px; font-weight: 600; border-radius: var(--radius-md); border: none; background: #D4537E; color: #fff; cursor: pointer; }
-  .btn-primary:hover { opacity: .85; }
-  .sync-status { font-size: 12px; color: var(--text2); text-align: right; margin-bottom: 8px; min-height: 18px; display: flex; align-items: center; justify-content: flex-end; gap: 5px; }
-  .sync-dot { width: 7px; height: 7px; border-radius: 50%; background: #3B6D11; flex-shrink: 0; }
-  .sync-dot.saving { background: #E9902A; }
-  @media (max-width: 500px) {
-    .form-row { grid-template-columns: 1fr; }
-    .ff.full { grid-column: 1; }
-    .shop-top { flex-direction: column; }
-    .shop-ratings { align-items: flex-start; }
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#E8594A;--yellow:#F5C430;--bg:#F4F4F4;--card:#fff;--border:#E8E8E8;--text:#1A1A1A;--muted:#999;--radius:16px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
+.app{max-width:680px;margin:0 auto;padding:0 0 3rem}
+.header{background:var(--accent);padding:2rem 2rem 0;transition:background .3s}
+.header-inner{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;gap:1rem}
+.brand{font-family:'Fredoka One',cursive;font-size:28px;color:#fff;line-height:1}
+.brand-sub{font-size:12px;color:rgba(255,255,255,.6);font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-top:4px}
+.names-row{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.name-field{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.15);border-radius:20px;padding:5px 12px 5px 5px}
+.name-field input{border:none;background:transparent;font-size:13px;font-weight:600;color:#fff;width:90px;outline:none;font-family:'Inter',sans-serif}
+.name-field input::placeholder{color:rgba(255,255,255,.5)}
+.av{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;background:rgba(255,255,255,.25);color:#fff}
+.tabs{display:flex}
+.tab{flex:1;padding:12px 16px;font-size:14px;font-weight:600;border:none;background:transparent;color:rgba(255,255,255,.55);cursor:pointer;font-family:'Inter',sans-serif;border-bottom:3px solid transparent;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:7px}
+.tab.active{color:#fff;border-bottom-color:#fff;background:rgba(255,255,255,.1)}
+.tab:hover:not(.active){color:rgba(255,255,255,.8)}
+.body{padding:1.5rem}
+.loading{text-align:center;padding:4rem 0;color:var(--muted);font-size:15px}
+.spinner{display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;margin-bottom:12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sync-row{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin-bottom:1rem;font-size:12px;color:var(--muted);font-weight:600}
+.sdot{width:7px;height:7px;border-radius:50%;background:#4CAF50;flex-shrink:0;transition:background .2s}
+.sdot.saving{background:var(--yellow)}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem}
+.stat{background:var(--card);border-radius:12px;padding:14px;text-align:center;border:1px solid var(--border)}
+.stat-num{font-family:'Fredoka One',cursive;font-size:26px;color:var(--accent)}
+.stat-lbl{font-size:11px;color:var(--muted);font-weight:600;margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
+.sec-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.place-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+.place-head{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 16px 12px;gap:12px;border-bottom:1px solid #F5F5F5}
+.place-name{font-size:16px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.place-addr{font-size:12px;color:var(--muted);margin-top:3px;font-weight:500}
+.place-scores{display:flex;flex-direction:column;gap:5px;align-items:flex-end;flex-shrink:0}
+.score-row{display:flex;align-items:center;gap:7px}
+.score-lbl{font-size:11px;font-weight:700;min-width:36px;text-align:right;white-space:nowrap}
+.stars{display:flex;gap:2px}
+.st{font-size:16px;cursor:pointer;color:#E0E0E0;line-height:1;transition:transform .12s}
+.st:hover{transform:scale(1.25)}
+.st.on{color:var(--yellow)}
+.prom{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;background:#F0FFF4;color:#2E7D32;border:1px solid #C8E6C9;align-self:flex-end}
+.prom-none{font-size:11px;font-weight:600;color:var(--muted);align-self:flex-end}
+.items-body{padding:10px 16px 12px}
+.items-lbl{font-size:10px;font-weight:700;color:#bbb;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.item-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #F7F7F7}
+.item-row:last-of-type{border-bottom:none}
+.item-name{flex:1;font-size:13px;font-weight:500;color:#333;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item-scorers{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.scorer{display:flex;align-items:center;gap:4px}
+.scorer-lbl{font-size:10px;font-weight:700}
+.scorer-stars{display:flex;gap:1px}
+.ss{font-size:12px;cursor:pointer;color:#E0E0E0;line-height:1;transition:transform .1s}
+.ss:hover{transform:scale(1.3)}
+.ss.on{color:var(--yellow)}
+.item-avg{font-size:11px;font-weight:700;min-width:30px;text-align:right;color:var(--accent)}
+.item-avg-none{font-size:11px;color:#ddd;min-width:30px;text-align:right}
+.add-row{display:flex;gap:7px;margin-top:10px}
+.add-row input{flex:1;font-size:13px;padding:7px 12px;border-radius:20px;border:1px solid var(--border);background:#FAFAFA;color:var(--text);outline:none;font-family:'Inter',sans-serif}
+.add-row input:focus{border-color:var(--accent)}
+.add-row input::placeholder{color:#ccc}
+.btn-add{padding:7px 14px;border-radius:20px;border:none;background:var(--accent);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;transition:opacity .15s}
+.btn-add:hover{opacity:.85}
+.card-foot{padding:0 16px 10px;display:flex;justify-content:flex-end}
+.btn-del{font-size:11px;color:#ccc;background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600}
+.btn-del:hover{color:#E8594A}
+.add-card{background:var(--card);border:1.5px dashed var(--border);border-radius:var(--radius);padding:1.25rem;margin-top:4px}
+.add-card-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.ff{display:flex;flex-direction:column;gap:4px}
+.ff label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.ff input{font-size:13px;padding:8px 12px;border-radius:10px;border:1px solid var(--border);background:#FAFAFA;color:var(--text);outline:none;font-family:'Inter',sans-serif}
+.ff input:focus{border-color:var(--accent)}
+.ff input::placeholder{color:#ccc}
+.ff.full{grid-column:1/-1}
+.btn-submit{width:100%;padding:10px;border-radius:12px;border:none;background:var(--accent);color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:4px;transition:opacity .15s}
+.btn-submit:hover{opacity:.85}
+.disagree{font-size:9px;background:#FFF3E0;color:#E65100;padding:1px 6px;border-radius:6px;font-weight:700}
+.empty{text-align:center;padding:2.5rem 0;color:#ccc;font-size:14px}
+@media(max-width:500px){
+  .header{padding:1.25rem 1rem 0}
+  .header-inner{flex-direction:column;align-items:flex-start}
+  .names-row{flex-direction:row;align-items:center}
+  .form-grid{grid-template-columns:1fr}
+  .ff.full{grid-column:1}
+  .place-head{flex-direction:column}
+  .place-scores{align-items:flex-start;flex-direction:row;flex-wrap:wrap;gap:8px}
+  .body{padding:1rem}
+}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="header">
-    <div class="header-icon">🍦</div>
-    <h1>Heladerías</h1>
-    <p>Puntuaciones para heladerias</p>
+  <div class="header" id="header">
+    <div class="header-inner">
+      <div>
+        <div class="brand" id="brandTitle">🍦 Heladerías</div>
+        <div class="brand-sub" id="brandSub">guía de dos pokemones</div>
+      </div>
+      <div class="names-row">
+        <div class="name-field">
+          <div class="av" id="av1">P1</div>
+          <input id="nameP1" value="Persona 1" oninput="updateNames()" placeholder="Nombre 1"/>
+        </div>
+        <div class="name-field">
+          <div class="av" id="av2">P2</div>
+          <input id="nameP2" value="Persona 2" oninput="updateNames()" placeholder="Nombre 2"/>
+        </div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" id="tabIce" onclick="switchTab('ice')">🍦 Heladerías</button>
+      <button class="tab" id="tabBurger" onclick="switchTab('burger')">🍔 Burgers</button>
+    </div>
   </div>
 
-  <div id="loadingScreen" class="loading">
-    <div class="spinner"></div><br>Cargando datos...
-  </div>
-
-  <div id="mainContent" style="display:none">
-    <div class="names-row">
-      <div class="nfield">
-        <div class="av av1" id="av1txt">P1</div>
-        <input id="nameP1" value="Persona 1" oninput="updateNames()" placeholder="Tu nombre..." />
-      </div>
-      <div class="nfield">
-        <div class="av av2" id="av2txt">P2</div>
-        <input id="nameP2" value="Persona 2" oninput="updateNames()" placeholder="Tu nombre..." />
-      </div>
-    </div>
-
-    <div class="sync-status" id="syncStatus">
-      <span class="sync-dot" id="syncDot"></span><span id="syncTxt">Sincronizado</span>
-    </div>
-
-    <div class="stats-row" id="statsRow"></div>
-
-    <div class="top-bar">
-      <span class="sec-title">Heladerías</span>
-      <select class="sort-sel" id="sortSel" onchange="render()">
-        <option value="name">Ordenar: nombre</option>
-        <option value="avg">Ordenar: promedio</option>
-        <option value="flavors">Ordenar: sabores</option>
-      </select>
-    </div>
-
-    <div id="list"></div>
-
-    <div class="add-section">
-      <div class="add-title"><i class="ti ti-plus"></i> Agregar heladería</div>
-      <div class="form-row">
-        <div class="ff"><label>Nombre *</label><input id="nN" placeholder="Ej: Freddo" /></div>
-        <div class="ff"><label>Dirección *</label><input id="nA" placeholder="Ej: Av. Santa Fe 1234" /></div>
-        <div class="ff full"><label>Sabores iniciales (separados por coma)</label><input id="nF" placeholder="Ej: dulce de leche, chocolate, frutilla" /></div>
-      </div>
-      <button class="btn-primary" onclick="addShop()">Agregar heladería</button>
+  <div class="body">
+    <div id="loadingEl" class="loading"><div class="spinner"></div><br>Cargando...</div>
+    <div id="mainEl" style="display:none">
+      <div class="sync-row"><span class="sdot" id="sdot"></span><span id="stxt">Sincronizado</span></div>
+      <div id="bodyContent"></div>
     </div>
   </div>
 </div>
@@ -168,242 +145,205 @@ const firebaseConfig = {
   appId: "1:44980890049:web:d92868afafd0c81c5fe740"
 };
 
-const fbApp = initializeApp(firebaseConfig);
-const db = getFirestore(fbApp);
+const fb = initializeApp(firebaseConfig);
+const db = getFirestore(fb);
 const docRef = doc(db, "app", "data");
 
-const FC = [
-  {bg:'#FBEAF0',text:'#993556',border:'#F4C0D1'},
-  {bg:'#E6F1FB',text:'#185FA5',border:'#B5D4F4'},
-  {bg:'#FAEEDA',text:'#854F0B',border:'#FAC775'},
-  {bg:'#E1F5EE',text:'#0F6E56',border:'#9FE1CB'},
-  {bg:'#EEEDFE',text:'#534AB7',border:'#CECBF6'},
-  {bg:'#FAECE7',text:'#993C1D',border:'#F5C4B3'},
-  {bg:'#EAF3DE',text:'#3B6D11',border:'#C0DD97'},
-];
+const DEFAULT = {
+  ice:{
+    places:[
+      {id:1,name:'Freddo',addr:'Av. Santa Fe 1234, Palermo',r1:0,r2:0,items:[
+        {name:'dulce de leche',r1:0,r2:0},{name:'chocolate amargo',r1:0,r2:0},{name:'maracuyá',r1:0,r2:0}]},
+      {id:2,name:'Volta',addr:'Honduras 5391, Palermo',r1:0,r2:0,items:[
+        {name:'pistacho',r1:0,r2:0},{name:'frambuesa',r1:0,r2:0}]},
+      {id:3,name:'Rapa Nui',addr:'Defensa 681, San Telmo',r1:0,r2:0,items:[
+        {name:'dulce de leche granizado',r1:0,r2:0},{name:'sambayón',r1:0,r2:0}]},
+    ],nid:4
+  },
+  burger:{
+    places:[
+      {id:1,name:"McDonald's",addr:'Av. Corrientes 3247, CABA',r1:0,r2:0,items:[
+        {name:'Big Mac',r1:0,r2:0},{name:'McDoble',r1:0,r2:0},{name:'Quarter Pounder',r1:0,r2:0}]},
+      {id:2,name:'Burger King',addr:'Lavalle 672, CABA',r1:0,r2:0,items:[
+        {name:'Whopper',r1:0,r2:0},{name:'Double Whopper',r1:0,r2:0},{name:'Crispy Chicken',r1:0,r2:0}]},
+    ],nid:3
+  }
+};
 
-const DEFAULT_SHOPS = [
-  {id:1,name:"Freddo",address:"Av. Santa Fe 1234, Palermo",r1:0,r2:0,flavors:[
-    {name:"dulce de leche",r1:0,r2:0},{name:"chocolate amargo",r1:0,r2:0},
-    {name:"crema americana",r1:0,r2:0},{name:"maracuyá",r1:0,r2:0}]},
-  {id:2,name:"Rapa Nui",address:"Defensa 681, San Telmo",r1:0,r2:0,flavors:[
-    {name:"dulce de leche granizado",r1:0,r2:0},{name:"chocolate con almendras",r1:0,r2:0},
-    {name:"sambayón",r1:0,r2:0}]},
-  {id:3,name:"Volta",address:"Honduras 5391, Palermo",r1:0,r2:0,flavors:[
-    {name:"pistacho",r1:0,r2:0},{name:"frambuesa",r1:0,r2:0},
-    {name:"limón al jengibre",r1:0,r2:0},{name:"vainilla bourbon",r1:0,r2:0}]},
-];
+const META = {
+  ice:{emoji:'🍦',title:'Heladerías',sub:'guía de dos pokemones',accent:'#E8594A',itemsLbl:'Sabores',addLbl:'Agregar heladería',ph:{name:'Ej: Freddo',addr:'Ej: Santa Fe 1234',items:'Ej: dulce de leche, chocolate'}},
+  burger:{emoji:'🍔',title:'Burgers',sub:'ranking de combos',accent:'#1A1A1A',itemsLbl:'Hamburguesas',addLbl:'Agregar local',ph:{name:"Ej: McDonald's",addr:'Ej: Corrientes 3247',items:'Ej: Big Mac, Whopper, McDoble'}}
+};
 
-let shops = [];
-let nid = 4;
+let D = { ice:{places:[],nid:4}, burger:{places:[],nid:3} };
+let tab = 'ice';
+let p1 = 'Persona 1', p2 = 'Persona 2';
 let saveTimer = null;
 let pendingSave = false;
 
-function n1() { return document.getElementById('nameP1').value || 'Persona 1'; }
-function n2() { return document.getElementById('nameP2').value || 'Persona 2'; }
-function ini(s) { return s.trim().split(/\s+/).map(w=>w[0]).join('').toUpperCase().slice(0,2) || '?'; }
-function avgStr(r1, r2) {
-  if(r1&&r2) return ((r1+r2)/2).toFixed(1);
-  if(r1) return r1.toFixed(1);
-  if(r2) return r2.toFixed(1);
-  return null;
+function ini(s){return s.trim().split(/\s+/).map(w=>w[0]).join('').toUpperCase().slice(0,2)||'?'}
+function avgS(r1,r2){if(r1&&r2)return((r1+r2)/2).toFixed(1);if(r1)return r1.toFixed(1);if(r2)return r2.toFixed(1);return null}
+
+function setSaving(v){
+  document.getElementById('sdot').className='sdot'+(v?' saving':'');
+  document.getElementById('stxt').textContent=v?'Guardando...':'Sincronizado';
 }
 
-function setSyncStatus(saving) {
-  document.getElementById('syncDot').className = 'sync-dot' + (saving ? ' saving' : '');
-  document.getElementById('syncTxt').textContent = saving ? 'Guardando...' : 'Sincronizado';
-}
-
-function save() {
-  pendingSave = true;
+function save(){
+  pendingSave=true;
   clearTimeout(saveTimer);
-  setSyncStatus(true);
-  saveTimer = setTimeout(async () => {
-    try {
-      await setDoc(docRef, {
-        shops, nid,
-        p1name: n1(),
-        p2name: n2()
-      });
-    } catch(e) { console.error(e); }
-    pendingSave = false;
-    setSyncStatus(false);
-  }, 500);
+  setSaving(true);
+  saveTimer=setTimeout(async()=>{
+    try{ await setDoc(docRef,{D,p1,p2}); }catch(e){console.error(e);}
+    pendingSave=false; setSaving(false);
+  },500);
 }
 
-window.updateNames = function() {
-  document.getElementById('av1txt').textContent = ini(n1());
-  document.getElementById('av2txt').textContent = ini(n2());
-  render(); save();
+window.updateNames=function(){
+  p1=document.getElementById('nameP1').value||'P1';
+  p2=document.getElementById('nameP2').value||'P2';
+  document.getElementById('av1').textContent=ini(p1);
+  document.getElementById('av2').textContent=ini(p2);
+  renderBody(); save();
 };
 
-window.setShopR = function(id, p, v) {
-  const s = shops.find(x=>x.id===id);
-  if(!s) return;
-  if(p===1) s.r1=v; else s.r2=v;
-  render(); save();
+window.switchTab=function(t){
+  tab=t;
+  const m=META[t];
+  document.getElementById('header').style.background=m.accent;
+  document.getElementById('brandTitle').textContent=m.emoji+' '+m.title;
+  document.getElementById('brandSub').textContent=m.sub;
+  document.getElementById('tabIce').className='tab'+(t==='ice'?' active':'');
+  document.getElementById('tabBurger').className='tab'+(t==='burger'?' active':'');
+  renderBody();
 };
 
-window.setFlavorR = function(id, fi, p, v) {
-  const s = shops.find(x=>x.id===id);
-  if(!s) return;
-  if(p===1) s.flavors[fi].r1=v; else s.flavors[fi].r2=v;
-  render(); save();
+window.setPlaceR=function(id,p,v){const pl=D[tab].places.find(x=>x.id===id);if(!pl)return;if(p===1)pl.r1=v;else pl.r2=v;renderBody();save();};
+window.setItemR=function(id,ii,p,v){const pl=D[tab].places.find(x=>x.id===id);if(!pl)return;if(p===1)pl.items[ii].r1=v;else pl.items[ii].r2=v;renderBody();save();};
+
+window.addItem=function(id){
+  const inp=document.getElementById('ai_'+id);
+  const v=inp.value.trim();if(!v)return;
+  D[tab].places.find(x=>x.id===id).items.push({name:v,r1:0,r2:0});
+  inp.value='';renderBody();save();
 };
 
-window.addFlav = function(id) {
-  const inp = document.getElementById('fi_'+id);
-  const v = inp.value.trim();
-  if(!v) return;
-  shops.find(x=>x.id===id).flavors.push({name:v,r1:0,r2:0});
-  inp.value = '';
-  render(); save();
+window.removePlace=function(id){
+  if(!confirm('¿Eliminar?'))return;
+  D[tab].places=D[tab].places.filter(x=>x.id!==id);
+  renderBody();save();
 };
 
-window.removeShop = function(id) {
-  if(!confirm('¿Eliminar esta heladería?')) return;
-  shops = shops.filter(x=>x.id!==id);
-  render(); save();
+window.addPlace=function(){
+  const name=document.getElementById('fN').value.trim();
+  const addr=document.getElementById('fA').value.trim();
+  const its=document.getElementById('fI').value.trim();
+  if(!name||!addr){alert('Completá nombre y dirección');return;}
+  const items=its?its.split(',').map(x=>({name:x.trim(),r1:0,r2:0})).filter(x=>x.name):[];
+  D[tab].places.push({id:D[tab].nid++,name,addr,r1:0,r2:0,items});
+  document.getElementById('fN').value='';
+  document.getElementById('fA').value='';
+  document.getElementById('fI').value='';
+  renderBody();save();
 };
 
-window.addShop = function() {
-  const name = document.getElementById('nN').value.trim();
-  const addr = document.getElementById('nA').value.trim();
-  const fs   = document.getElementById('nF').value.trim();
-  if(!name||!addr) { alert('Completá nombre y dirección'); return; }
-  const flavors = fs ? fs.split(',').map(x=>({name:x.trim(),r1:0,r2:0})).filter(x=>x.name) : [];
-  shops.push({id:nid++,name,address:addr,r1:0,r2:0,flavors});
-  document.getElementById('nN').value = '';
-  document.getElementById('nA').value = '';
-  document.getElementById('nF').value = '';
-  render(); save();
-};
-
-function shopStarsHtml(val, id, p) {
-  let h = '';
-  for(let i=1;i<=5;i++)
-    h += `<span class="star${i<=val?' on':''}" onclick="setShopR(${id},${p},${i})">★</span>`;
+function starsHtml(val,cls,fn){
+  let h='';
+  for(let i=1;i<=5;i++)h+=`<span class="${cls}${i<=val?' on':''}" onclick="${fn}(${i})">★</span>`;
   return h;
 }
 
-function flavorStarsHtml(val, id, fi, p) {
-  let h = '';
-  for(let i=1;i<=5;i++)
-    h += `<span class="psc-star${i<=val?' on':''}" onclick="setFlavorR(${id},${fi},${p},${i})">★</span>`;
-  return h;
-}
+function renderBody(){
+  const m=META[tab];
+  const d=D[tab];
+  const places=d.places;
+  const total=places.length;
+  const totalIt=places.reduce((a,pl)=>a+pl.items.length,0);
+  const rated=places.filter(pl=>pl.r1||pl.r2);
+  const best=rated.length?rated.reduce((a,b)=>parseFloat(avgS(b.r1,b.r2)||0)>parseFloat(avgS(a.r1,a.r2)||0)?b:a):null;
 
-function render() {
-  const sort = document.getElementById('sortSel').value;
-  let sorted = [...shops];
-  if(sort==='avg') sorted.sort((a,b)=>(parseFloat(avgStr(b.r1,b.r2)||0))-(parseFloat(avgStr(a.r1,a.r2)||0)));
-  else if(sort==='flavors') sorted.sort((a,b)=>b.flavors.length-a.flavors.length);
-  else sorted.sort((a,b)=>a.name.localeCompare(b.name));
+  const stats=`<div class="stats-row">
+    <div class="stat"><div class="stat-num">${total}</div><div class="stat-lbl">${tab==='ice'?'heladerías':'locales'}</div></div>
+    <div class="stat"><div class="stat-num">${totalIt}</div><div class="stat-lbl">${m.itemsLbl.toLowerCase()}</div></div>
+    <div class="stat"><div class="stat-num" style="font-size:${best?'14px':'26px'};line-height:1.4">${best?best.name:'—'}</div><div class="stat-lbl">top local</div></div>
+  </div>`;
 
-  const cont = document.getElementById('list');
-  if(!sorted.length) {
-    cont.innerHTML = '<div style="text-align:center;padding:2.5rem 0;color:var(--text2)">Sin heladerías aún. ¡Agregá la primera!</div>';
-    updateStats(); return;
-  }
+  const cards=places.length?places.map(pl=>{
+    const av=avgS(pl.r1,pl.r2);
+    const both=pl.r1&&pl.r2;
+    const dis=both&&Math.abs(pl.r1-pl.r2)>=2;
+    const p1color=tab==='ice'?'#E8594A':'#555';
 
-  cont.innerHTML = sorted.map(s => {
-    const avg = avgStr(s.r1, s.r2);
-    const both = s.r1 && s.r2;
-    const disagree = both && Math.abs(s.r1-s.r2) >= 2;
-    const flavHtml = s.flavors.map((f,i) => {
-      const c = FC[i % FC.length];
-      const fa = avgStr(f.r1, f.r2);
-      const fboth = f.r1 && f.r2;
-      const fdis = fboth && Math.abs(f.r1-f.r2) >= 2;
-      return `<div class="flavor-row" style="background:${c.bg};border-color:${c.border}">
-        <span class="flavor-name" style="color:${c.text}">${f.name}${fdis?'<span style="font-size:10px;background:#FAEEDA;color:#854F0B;padding:1px 6px;border-radius:8px;margin-left:4px">distinto!</span>':''}</span>
-        <div class="flavor-scores">
-          <div class="p-score">
-            <span class="p-score-lbl" style="color:#993556">${ini(n1())}</span>
-            <div class="p-score-stars">${flavorStarsHtml(f.r1,s.id,i,1)}</div>
-          </div>
-          <div class="p-score">
-            <span class="p-score-lbl" style="color:#185FA5">${ini(n2())}</span>
-            <div class="p-score-stars">${flavorStarsHtml(f.r2,s.id,i,2)}</div>
-          </div>
-          <div class="fl-avg">${fa?`<span style="font-weight:600;color:${fboth?'#3B6D11':'#888'}">★${fa}</span>`:'<span style="color:#aaa">—</span>'}</div>
+    const items=pl.items.map((it,ii)=>{
+      const ia=avgS(it.r1,it.r2);
+      const iboth=it.r1&&it.r2;
+      const idis=iboth&&Math.abs(it.r1-it.r2)>=2;
+      return `<div class="item-row">
+        <span class="item-name">${it.name}${idis?' <span class="disagree">distinto</span>':''}</span>
+        <div class="item-scorers">
+          <div class="scorer"><span class="scorer-lbl" style="color:${p1color}">${ini(p1)}</span><div class="scorer-stars">${starsHtml(it.r1,'ss',`(v)=>setItemR(${pl.id},${ii},1,v)`)}</div></div>
+          <div class="scorer"><span class="scorer-lbl" style="color:#378ADD">${ini(p2)}</span><div class="scorer-stars">${starsHtml(it.r2,'ss',`(v)=>setItemR(${pl.id},${ii},2,v)`)}</div></div>
+          ${ia?`<span class="item-avg">★${ia}</span>`:`<span class="item-avg-none">—</span>`}
         </div>
       </div>`;
     }).join('');
 
-    return `<div class="shop-card">
-      <div class="shop-top">
-        <div class="shop-info">
-          <div class="shop-name">
-            <i class="ti ti-building-store" style="font-size:15px"></i>
-            ${s.name}
-            ${disagree?'<span class="disagree-tag">¡opiniones distintas!</span>':''}
-          </div>
-          <div class="shop-addr"><i class="ti ti-map-pin" style="font-size:13px"></i>${s.address}</div>
+    return `<div class="place-card">
+      <div class="place-head">
+        <div style="min-width:0;flex:1">
+          <div class="place-name">${m.emoji} ${pl.name}${dis?' <span class="disagree">distintos</span>':''}</div>
+          <div class="place-addr">📍 ${pl.addr}</div>
         </div>
-        <div class="shop-ratings">
-          <div class="duo-row">
-            <span class="duo-lbl" style="color:#993556">${n1()}</span>
-            <div class="stars-inline">${shopStarsHtml(s.r1,s.id,1)}</div>
-          </div>
-          <div class="duo-row">
-            <span class="duo-lbl" style="color:#185FA5">${n2()}</span>
-            <div class="stars-inline">${shopStarsHtml(s.r2,s.id,2)}</div>
-          </div>
-          <div style="text-align:right">
-            <span class="prom-badge ${both?'prom-both':'prom-one'}">${avg?'prom. '+avg:'sin puntuar'}</span>
-          </div>
+        <div class="place-scores">
+          <div class="score-row"><span class="score-lbl" style="color:${p1color}">${p1}</span><div class="stars">${starsHtml(pl.r1,'st',`(v)=>setPlaceR(${pl.id},1,v)`)}</div></div>
+          <div class="score-row"><span class="score-lbl" style="color:#378ADD">${p2}</span><div class="stars">${starsHtml(pl.r2,'st',`(v)=>setPlaceR(${pl.id},2,v)`)}</div></div>
+          ${av?`<span class="prom">★ ${av}</span>`:`<span class="prom-none">sin puntuar</span>`}
         </div>
       </div>
-      ${s.flavors.length
-        ? `<div class="fl-section-title">Sabores</div><div class="flavor-list">${flavHtml}</div>`
-        : '<div style="font-size:13px;color:var(--text2);margin-bottom:10px">Sin sabores cargados</div>'}
-      <div class="add-fl-row">
-        <input id="fi_${s.id}" placeholder="Agregar sabor..." onkeydown="if(event.key==='Enter')addFlav(${s.id})" />
-        <button class="btn-icon" onclick="addFlav(${s.id})"><i class="ti ti-plus"></i></button>
+      <div class="items-body">
+        <div class="items-lbl">${m.itemsLbl}</div>
+        ${items||`<div style="font-size:12px;color:#ccc;padding:4px 0">Sin ${m.itemsLbl.toLowerCase()} cargadas</div>`}
+        <div class="add-row">
+          <input id="ai_${pl.id}" placeholder="Agregar ${m.itemsLbl.slice(0,-1).toLowerCase()}..." onkeydown="if(event.key==='Enter')addItem(${pl.id})"/>
+          <button class="btn-add" onclick="addItem(${pl.id})">+ Agregar</button>
+        </div>
       </div>
-      <div class="shop-foot">
-        <button class="btn-del" onclick="removeShop(${s.id})"><i class="ti ti-trash" style="font-size:13px"></i> Eliminar</button>
-      </div>
+      <div class="card-foot"><button class="btn-del" onclick="removePlace(${pl.id})">eliminar</button></div>
     </div>`;
-  }).join('');
+  }).join('')
+  :`<div class="empty">Sin ${tab==='ice'?'heladerías':'locales'} aún. ¡Agregá el primero!</div>`;
 
-  updateStats();
+  document.getElementById('bodyContent').innerHTML=`
+    ${stats}
+    <div class="sec-label">${tab==='ice'?'heladerías':'locales'}</div>
+    ${cards}
+    <div class="add-card">
+      <div class="add-card-title">+ ${m.addLbl}</div>
+      <div class="form-grid">
+        <div class="ff"><label>Nombre *</label><input id="fN" placeholder="${m.ph.name}"/></div>
+        <div class="ff"><label>Dirección *</label><input id="fA" placeholder="${m.ph.addr}"/></div>
+        <div class="ff full"><label>${m.itemsLbl} (separados por coma)</label><input id="fI" placeholder="${m.ph.items}"/></div>
+      </div>
+      <button class="btn-submit" onclick="addPlace()">${m.addLbl}</button>
+    </div>`;
 }
 
-function updateStats() {
-  const total = shops.length;
-  const totalFl = shops.reduce((a,s)=>a+s.flavors.length, 0);
-  const rated = shops.filter(s=>s.r1||s.r2);
-  const best = rated.length ? rated.reduce((a,b)=>
-    parseFloat(avgStr(b.r1,b.r2)||0) > parseFloat(avgStr(a.r1,a.r2)||0) ? b : a
-  ) : null;
-  document.getElementById('statsRow').innerHTML = `
-    <div class="stat"><div class="stat-num">${total}</div><div class="stat-lbl">heladerías</div></div>
-    <div class="stat"><div class="stat-num">${totalFl}</div><div class="stat-lbl">sabores</div></div>
-    <div class="stat"><div class="stat-num" style="font-size:${best?'14px':'22px'};line-height:1.5">${best?best.name:'—'}</div><div class="stat-lbl">mejor promedio</div></div>
-  `;
-}
-
-// Escuchar Firestore en tiempo real — ignorar si hay un guardado nuestro pendiente
-onSnapshot(docRef, (snap) => {
-  if(pendingSave) return;
-  document.getElementById('loadingScreen').style.display = 'none';
-  document.getElementById('mainContent').style.display = 'block';
-  if(snap.exists()) {
-    const data = snap.data();
-    shops = data.shops || DEFAULT_SHOPS;
-    nid = data.nid || (Math.max(0,...shops.map(s=>s.id)) + 1);
-    if(data.p1name) document.getElementById('nameP1').value = data.p1name;
-    if(data.p2name) document.getElementById('nameP2').value = data.p2name;
+onSnapshot(docRef,(snap)=>{
+  if(pendingSave)return;
+  document.getElementById('loadingEl').style.display='none';
+  document.getElementById('mainEl').style.display='block';
+  if(snap.exists()){
+    const data=snap.data();
+    if(data.D) D=data.D;
+    if(data.p1){p1=data.p1;document.getElementById('nameP1').value=p1;}
+    if(data.p2){p2=data.p2;document.getElementById('nameP2').value=p2;}
   } else {
-    shops = DEFAULT_SHOPS;
-    nid = 4;
+    D=JSON.parse(JSON.stringify(DEFAULT));
     save();
   }
-  document.getElementById('av1txt').textContent = ini(n1());
-  document.getElementById('av2txt').textContent = ini(n2());
-  render();
+  document.getElementById('av1').textContent=ini(p1);
+  document.getElementById('av2').textContent=ini(p2);
+  renderBody();
 });
 </script>
 </body>
