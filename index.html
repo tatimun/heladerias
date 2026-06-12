@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title> 🍦🍔📋</title>
+<title>Guía Gastronómica 🍦🍔📋</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -20,13 +20,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
 .name-field input{border:none;background:transparent;font-size:13px;font-weight:600;color:#fff;width:90px;outline:none;font-family:'Inter',sans-serif}
 .name-field input::placeholder{color:rgba(255,255,255,.5)}
 .av{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;background:rgba(255,255,255,.25);color:#fff}
-.tabs{display:flex}
-.tab{flex:1;padding:12px 8px;font-size:13px;font-weight:600;border:none;background:transparent;color:rgba(255,255,255,.55);cursor:pointer;font-family:'Inter',sans-serif;border-bottom:3px solid transparent;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:6px}
+.tabs{display:flex;overflow-x:auto}
+.tab{flex:1;min-width:fit-content;padding:12px 8px;font-size:12px;font-weight:600;border:none;background:transparent;color:rgba(255,255,255,.55);cursor:pointer;font-family:'Inter',sans-serif;border-bottom:3px solid transparent;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap}
 .tab.active{color:#fff;border-bottom-color:#fff;background:rgba(255,255,255,.1)}
 .tab:hover:not(.active){color:rgba(255,255,255,.8)}
 .body{padding:1.5rem}
 .loading{text-align:center;padding:4rem 0;color:var(--muted);font-size:15px}
-.spinner{display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin-bottom:12px}
+.spinner{display:inline-block;width:28px;height:28px;border:3px solid var(--border);border-top-color:#6C63FF;border-radius:50%;animation:spin .7s linear infinite;margin-bottom:12px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .sync-row{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin-bottom:1rem;font-size:12px;color:var(--muted);font-weight:600}
 .sdot{width:7px;height:7px;border-radius:50%;background:#4CAF50;flex-shrink:0;transition:background .2s}
@@ -36,6 +36,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
 .stat-num{font-family:'Fredoka One',cursive;font-size:26px}
 .stat-lbl{font-size:11px;color:var(--muted);font-weight:600;margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
 .sec-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+/* place cards */
 .place-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
 .place-head{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 16px 12px;gap:12px;border-bottom:1px solid #F5F5F5}
 .place-name{font-size:16px;font-weight:700;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
@@ -44,7 +45,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
 .score-row{display:flex;align-items:center;gap:7px}
 .score-lbl{font-size:11px;font-weight:700;min-width:36px;text-align:right;white-space:nowrap}
 .stars{display:flex;gap:2px}
-.st{font-size:16px;cursor:pointer;color:#E0E0E0;line-height:1;transition:transform .12s}
+.st{font-size:16px;cursor:pointer;color:#E0E0E0;line-height:1;transition:transform .12s;user-select:none}
 .st:hover{transform:scale(1.25)}
 .st.on{color:var(--yellow)}
 .prom{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;background:#F0FFF4;color:#2E7D32;border:1px solid #C8E6C9;align-self:flex-end}
@@ -58,40 +59,42 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
 .scorer{display:flex;align-items:center;gap:4px}
 .scorer-lbl{font-size:10px;font-weight:700}
 .scorer-stars{display:flex;gap:1px}
-.ss{font-size:12px;cursor:pointer;color:#E0E0E0;line-height:1;transition:transform .1s}
+.ss{font-size:12px;cursor:pointer;color:#E0E0E0;line-height:1;transition:transform .1s;user-select:none}
 .ss:hover{transform:scale(1.3)}
 .ss.on{color:var(--yellow)}
 .item-avg{font-size:11px;font-weight:700;min-width:30px;text-align:right}
 .item-avg-none{font-size:11px;color:#ddd;min-width:30px;text-align:right}
 .add-row{display:flex;gap:7px;margin-top:10px}
-.add-row input{flex:1;font-size:13px;padding:7px 12px;border-radius:20px;border:1px solid var(--border);background:#FAFAFA;color:var(--text);outline:none;font-family:'Inter',sans-serif}
+.add-row input,.ff input,.plan-input{font-size:13px;padding:7px 12px;border-radius:20px;border:1px solid var(--border);background:#FAFAFA;color:var(--text);outline:none;font-family:'Inter',sans-serif}
+.add-row input{flex:1}
 .add-row input::placeholder{color:#ccc}
 .btn-add{padding:7px 14px;border-radius:20px;border:none;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;transition:opacity .15s}
 .btn-add:hover{opacity:.85}
 .card-foot{padding:0 16px 10px;display:flex;justify-content:flex-end}
-.btn-del{font-size:11px;color:#ccc;background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600}
-.btn-del:hover{color:#E8594A}
+.btn-del-sm{font-size:11px;color:#ccc;background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600}
+.btn-del-sm:hover{color:#E8594A}
 .add-card{background:var(--card);border:1.5px dashed var(--border);border-radius:var(--radius);padding:1.25rem;margin-top:4px}
 .add-card-title{font-size:14px;font-weight:700;margin-bottom:12px}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .ff{display:flex;flex-direction:column;gap:4px}
 .ff label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
-.ff input{font-size:13px;padding:8px 12px;border-radius:10px;border:1px solid var(--border);background:#FAFAFA;color:var(--text);outline:none;font-family:'Inter',sans-serif}
+.ff input{border-radius:10px;padding:8px 12px}
 .ff input::placeholder{color:#ccc}
 .ff.full{grid-column:1/-1}
 .btn-submit{width:100%;padding:10px;border-radius:12px;border:none;color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:4px;transition:opacity .15s}
 .btn-submit:hover{opacity:.85}
 .disagree{font-size:9px;background:#FFF3E0;color:#E65100;padding:1px 6px;border-radius:6px;font-weight:700}
 .empty{text-align:center;padding:2.5rem 0;color:#ccc;font-size:14px}
+/* plans */
 .progress-bar{background:#F0F0F0;border-radius:20px;height:6px;margin-bottom:1.25rem;overflow:hidden}
 .progress-fill{height:100%;border-radius:20px;transition:width .4s}
 .filter-row{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
 .filter-btn{padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
-.plan-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:8px;transition:opacity .2s}
-.plan-item.done{opacity:.5}
-.plan-item.done .plan-text{text-decoration:line-through;color:var(--muted)}
-.check-btn{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);background:transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;font-size:12px;color:transparent}
-.check-btn.checked{color:#fff}
+.filter-btn.factive{background:#6C63FF;color:#fff;border-color:#6C63FF}
+.plan-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.plan-item.done .plan-text{text-decoration:line-through;color:var(--muted);opacity:.6}
+.check-btn{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);background:transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;font-size:12px;color:transparent;font-family:'Inter',sans-serif}
+.check-btn.checked{background:#6C63FF;border-color:#6C63FF;color:#fff}
 .check-btn:hover:not(.checked){border-color:#6C63FF}
 .plan-text{flex:1;font-size:14px;font-weight:500;line-height:1.4}
 .proposed-chip{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;flex-shrink:0;white-space:nowrap}
@@ -101,19 +104,35 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
 .plan-del{background:none;border:none;cursor:pointer;color:#ddd;font-size:18px;line-height:1;transition:color .15s;flex-shrink:0}
 .plan-del:hover{color:#E8594A}
 .who-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.who-row{display:flex;gap:0;background:#F0F0F0;border-radius:10px;padding:3px;margin-bottom:12px}
+.who-row{display:flex;background:#F0F0F0;border-radius:10px;padding:3px;margin-bottom:12px}
 .who-opt{flex:1;padding:7px;border-radius:8px;border:none;background:transparent;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;color:#999;transition:all .15s;text-align:center}
 .who-opt.sel-p1{background:#fff;color:#B91C1C;box-shadow:0 1px 4px rgba(0,0,0,.08)}
 .who-opt.sel-p2{background:#fff;color:#1D4ED8;box-shadow:0 1px 4px rgba(0,0,0,.08)}
 .who-opt.sel-both{background:#fff;color:#6D28D9;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+/* media */
+.media-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+.media-head{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 16px 12px;gap:12px;border-bottom:1px solid #F5F5F5}
+.media-info{flex:1;min-width:0}
+.media-title-txt{font-size:15px;font-weight:700;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.media-meta{font-size:12px;color:var(--muted);margin-top:3px;font-weight:500}
+.media-type-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:#F3F4F6;color:#6B7280}
+.media-scores{display:flex;flex-direction:column;gap:5px;align-items:flex-end;flex-shrink:0}
+.status-row{display:flex;gap:6px;padding:10px 16px;border-top:1px solid #F5F5F5}
+.status-chip{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--muted);font-family:'Inter',sans-serif;transition:all .15s}
+.status-chip.sel-pendiente{background:#FFF3E0;color:#E65100;border-color:#FFB74D}
+.status-chip.sel-viendo{background:#E3F2FD;color:#1565C0;border-color:#90CAF9}
+.status-chip.sel-vista{background:#E8F5E9;color:#2E7D32;border-color:#A5D6A7}
+.type-toggle{display:flex;background:#F0F0F0;border-radius:10px;padding:3px;margin-bottom:12px}
+.type-opt{flex:1;padding:6px;border-radius:8px;border:none;background:transparent;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;color:#999;transition:all .15s;text-align:center}
+.type-opt.sel{background:#fff;color:#E91E8C;box-shadow:0 1px 4px rgba(0,0,0,.08)}
 @media(max-width:500px){
   .header{padding:1.25rem 1rem 0}
   .header-inner{flex-direction:column;align-items:flex-start}
   .names-row{flex-direction:row}
   .form-grid{grid-template-columns:1fr}
   .ff.full{grid-column:1}
-  .place-head{flex-direction:column}
-  .place-scores{align-items:flex-start;flex-direction:row;flex-wrap:wrap;gap:8px}
+  .place-head,.media-head{flex-direction:column}
+  .place-scores,.media-scores{align-items:flex-start;flex-direction:row;flex-wrap:wrap;gap:8px}
   .body{padding:1rem}
 }
 </style>
@@ -124,7 +143,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
     <div class="header-inner">
       <div>
         <div class="brand" id="brandTitle">🍦 Heladerías</div>
-        <div class="brand-sub" id="brandSub">guía de dos pokemones</div>
+        <div class="brand-sub" id="brandSub">guía de dos catadores</div>
       </div>
       <div class="names-row" id="namesRow">
         <div class="name-field">
@@ -141,9 +160,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
       <button class="tab active" id="tabIce" onclick="switchTab('ice')">🍦 Heladerías</button>
       <button class="tab" id="tabBurger" onclick="switchTab('burger')">🍔 Burgers</button>
       <button class="tab" id="tabPlans" onclick="switchTab('plans')">📋 Planes</button>
+      <button class="tab" id="tabMedia" onclick="switchTab('media')">🎬 Series & Pelis</button>
     </div>
   </div>
-
   <div class="body">
     <div id="loadingEl" class="loading"><div class="spinner"></div><br>Cargando...</div>
     <div id="mainEl" style="display:none">
@@ -153,30 +172,27 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
   </div>
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-const firebaseConfig = {
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
+firebase.initializeApp({
   apiKey: "AIzaSyCGGZKfQxaRSldX1VK7-qBOgyN-oDtuIfs",
   authDomain: "heladerias-b81a6.firebaseapp.com",
   projectId: "heladerias-b81a6",
   storageBucket: "heladerias-b81a6.firebasestorage.app",
   messagingSenderId: "44980890049",
   appId: "1:44980890049:web:d92868afafd0c81c5fe740"
-};
+});
+var db = firebase.firestore();
+var docRef = db.collection("app").doc("data2");
 
-const fb = initializeApp(firebaseConfig);
-const db = getFirestore(fb);
-const docRef = doc(db, "app", "data");
-
-const ACCENTS = { ice:'#E8594A', burger:'#1A1A1A', plans:'#6C63FF' };
-const META = {
+var ACCENTS = { ice:'#E8594A', burger:'#1A1A1A', plans:'#6C63FF', media:'#E91E8C' };
+var META = {
   ice:{ emoji:'🍦', title:'Heladerías', sub:'guía de dos catadores', itemsLbl:'Sabores', addLbl:'Agregar heladería', ph:{name:'Ej: Freddo', addr:'Ej: Santa Fe 1234', items:'Ej: dulce de leche, chocolate'} },
-  burger:{ emoji:'🍔', title:'Burgers', sub:'ranking de combos', itemsLbl:'Hamburguesas', addLbl:'Agregar local', ph:{name:"Ej: McDonald's", addr:'Ej: Corrientes 3247', items:'Ej: Big Mac, Whopper, McDoble'} }
+  burger:{ emoji:'🍔', title:'Burgers', sub:'ranking de combos', itemsLbl:'Hamburguesas', addLbl:'Agregar local', ph:{name:"Ej: McDonald's", addr:'Ej: Corrientes 3247', items:'Ej: Big Mac, Whopper'} }
 };
 
-let D = {
+var D = {
   ice:{ places:[
     {id:1,name:'Freddo',addr:'Av. Santa Fe 1234, Palermo',r1:0,r2:0,items:[{name:'dulce de leche',r1:0,r2:0},{name:'chocolate amargo',r1:0,r2:0},{name:'maracuyá',r1:0,r2:0}]},
     {id:2,name:'Volta',addr:'Honduras 5391, Palermo',r1:0,r2:0,items:[{name:'pistacho',r1:0,r2:0},{name:'frambuesa',r1:0,r2:0}]},
@@ -190,279 +206,430 @@ let D = {
     {id:1,text:'Ir a probar Freddo en Palermo',done:false,who:'both'},
     {id:2,text:'Probar el pistacho de Volta',done:false,who:'p1'},
     {id:3,text:'Visitar la feria de San Telmo',done:false,who:'both'},
-  ], nid:4, filter:'all', selectedWho:'both' }
+  ], nid:4, filter:'all', selectedWho:'both' },
+  media:{ items:[
+    {id:1,title:'The Bear',type:'serie',genre:'Drama',status:'viendo',r1:0,r2:0},
+    {id:2,title:'Dune',type:'pelicula',genre:'Ciencia ficción',status:'vista',r1:4,r2:5},
+    {id:3,title:'Succession',type:'serie',genre:'Drama',status:'pendiente',r1:0,r2:0},
+  ], nid:4, filter:'all', typeFilter:'all', newType:'serie' }
 };
 
-let tab = 'ice';
-let p1 = 'Persona 1', p2 = 'Persona 2';
-let saveTimer = null;
-let pendingSave = false;
+var tab = 'ice';
+var p1 = 'Persona 1', p2 = 'Persona 2';
+var saveTimer = null;
+var pendingSave = false;
 
-function ini(s){ return s.trim().split(/\s+/).map(w=>w[0]).join('').toUpperCase().slice(0,2)||'?' }
+function ini(s){ return s.trim().split(/\s+/).map(function(w){return w[0]}).join('').toUpperCase().slice(0,2)||'?' }
 function avgS(r1,r2){ if(r1&&r2)return((r1+r2)/2).toFixed(1); if(r1)return r1.toFixed(1); if(r2)return r2.toFixed(1); return null }
 
 function setSaving(v){
-  document.getElementById('sdot').className='sdot'+(v?' saving':'');
-  document.getElementById('stxt').textContent=v?'Guardando...':'Sincronizado';
+  document.getElementById('sdot').className = 'sdot'+(v?' saving':'');
+  document.getElementById('stxt').textContent = v?'Guardando...':'Sincronizado';
 }
 
 function save(){
-  pendingSave=true;
+  pendingSave = true;
   clearTimeout(saveTimer);
   setSaving(true);
-  saveTimer=setTimeout(async()=>{
-    try{ await setDoc(docRef,{D,p1,p2}); }catch(e){ console.error(e); }
-    pendingSave=false; setSaving(false);
-  },500);
+  saveTimer = setTimeout(function(){
+    docRef.set({D:D, p1:p1, p2:p2}).catch(function(e){console.error(e)});
+    pendingSave = false;
+    setSaving(false);
+  }, 500);
 }
 
-window.updateNames=function(){
-  p1=document.getElementById('nameP1').value||'P1';
-  p2=document.getElementById('nameP2').value||'P2';
-  document.getElementById('av1').textContent=ini(p1);
-  document.getElementById('av2').textContent=ini(p2);
+function updateNames(){
+  p1 = document.getElementById('nameP1').value || 'P1';
+  p2 = document.getElementById('nameP2').value || 'P2';
+  document.getElementById('av1').textContent = ini(p1);
+  document.getElementById('av2').textContent = ini(p2);
   renderBody(); save();
-};
+}
 
-window.switchTab=function(t){
-  tab=t;
-  const accent=ACCENTS[t];
-  document.getElementById('header').style.background=accent;
-  if(t==='plans'){
-    document.getElementById('brandTitle').textContent='📋 Planes';
-    document.getElementById('brandSub').textContent='qué queremos hacer';
-    document.getElementById('namesRow').style.display='none';
-  } else {
-    const m=META[t];
-    document.getElementById('brandTitle').textContent=m.emoji+' '+m.title;
-    document.getElementById('brandSub').textContent=m.sub;
-    document.getElementById('namesRow').style.display='flex';
-  }
-  ['tabIce','tabBurger','tabPlans'].forEach(id=>document.getElementById(id).className='tab');
-  document.getElementById(t==='ice'?'tabIce':t==='burger'?'tabBurger':'tabPlans').className='tab active';
+function switchTab(t){
+  tab = t;
+  var accent = ACCENTS[t];
+  document.getElementById('header').style.background = accent;
+  var titles = { ice:'🍦 Heladerías', burger:'🍔 Burgers', plans:'📋 Planes', media:'🎬 Series & Pelis' };
+  var subs = { ice:'guía de dos catadores', burger:'ranking de combos', plans:'qué queremos hacer', media:'qué queremos ver' };
+  document.getElementById('brandTitle').textContent = titles[t];
+  document.getElementById('brandSub').textContent = subs[t];
+  document.getElementById('namesRow').style.display = (t==='plans') ? 'none' : 'flex';
+  ['ice','burger','plans','media'].forEach(function(k){
+    document.getElementById('tab'+k.charAt(0).toUpperCase()+k.slice(1)).className = 'tab'+(k===t?' active':'');
+  });
+  // fix tab ids
+  document.getElementById('tabIce').className = 'tab'+(t==='ice'?' active':'');
+  document.getElementById('tabBurger').className = 'tab'+(t==='burger'?' active':'');
+  document.getElementById('tabPlans').className = 'tab'+(t==='plans'?' active':'');
+  document.getElementById('tabMedia').className = 'tab'+(t==='media'?' active':'');
   renderBody();
-};
+}
 
-window.setPlaceR=function(id,p,v){ const pl=D[tab].places.find(x=>x.id===id);if(!pl)return;if(p===1)pl.r1=v;else pl.r2=v;renderBody();save(); };
-window.setItemR=function(id,ii,p,v){ const pl=D[tab].places.find(x=>x.id===id);if(!pl)return;if(p===1)pl.items[ii].r1=v;else pl.items[ii].r2=v;renderBody();save(); };
+// ── PLACE STARS ──────────────────────────────────────────
+function setPlaceR(id, person, val){
+  var pl = D[tab].places.find(function(x){return x.id===id});
+  if(!pl) return;
+  if(person===1) pl.r1=val; else pl.r2=val;
+  renderBody(); save();
+}
 
-window.addItem=function(id){
-  const inp=document.getElementById('ai_'+id);
-  const v=inp.value.trim();if(!v)return;
-  D[tab].places.find(x=>x.id===id).items.push({name:v,r1:0,r2:0});
-  inp.value='';renderBody();save();
-};
+function setItemR(id, ii, person, val){
+  var pl = D[tab].places.find(function(x){return x.id===id});
+  if(!pl) return;
+  if(person===1) pl.items[ii].r1=val; else pl.items[ii].r2=val;
+  renderBody(); save();
+}
 
-window.removePlace=function(id){
-  if(!confirm('¿Eliminar?'))return;
-  D[tab].places=D[tab].places.filter(x=>x.id!==id);
-  renderBody();save();
-};
+function addItem(id){
+  var inp = document.getElementById('ai_'+id);
+  var v = inp.value.trim(); if(!v) return;
+  D[tab].places.find(function(x){return x.id===id}).items.push({name:v,r1:0,r2:0});
+  inp.value=''; renderBody(); save();
+}
 
-window.addPlace=function(){
-  const m=META[tab];
-  const name=document.getElementById('fN').value.trim();
-  const addr=document.getElementById('fA').value.trim();
-  const its=document.getElementById('fI').value.trim();
-  if(!name||!addr){alert('Completá nombre y dirección');return;}
-  const items=its?its.split(',').map(x=>({name:x.trim(),r1:0,r2:0})).filter(x=>x.name):[];
-  D[tab].places.push({id:D[tab].nid++,name,addr,r1:0,r2:0,items});
+function removePlace(id){
+  if(!confirm('¿Eliminar?')) return;
+  D[tab].places = D[tab].places.filter(function(x){return x.id!==id});
+  renderBody(); save();
+}
+
+function addPlace(){
+  var name = document.getElementById('fN').value.trim();
+  var addr = document.getElementById('fA').value.trim();
+  var its  = document.getElementById('fI').value.trim();
+  if(!name||!addr){ alert('Completá nombre y dirección'); return; }
+  var items = its ? its.split(',').map(function(x){return{name:x.trim(),r1:0,r2:0}}).filter(function(x){return x.name}) : [];
+  D[tab].places.push({id:D[tab].nid++, name:name, addr:addr, r1:0, r2:0, items:items});
   document.getElementById('fN').value='';
   document.getElementById('fA').value='';
   document.getElementById('fI').value='';
-  renderBody();save();
-};
+  renderBody(); save();
+}
 
-window.togglePlan=function(id){
-  const it=D.plans.items.find(x=>x.id===id);if(!it)return;
-  it.done=!it.done;renderBody();save();
-};
-
-window.deletePlan=function(id){
-  D.plans.items=D.plans.items.filter(x=>x.id!==id);
-  renderBody();save();
-};
-
-window.addPlan=function(){
-  const inp=document.getElementById('planInput');
-  const v=inp.value.trim();if(!v)return;
-  D.plans.items.push({id:D.plans.nid++,text:v,done:false,who:D.plans.selectedWho});
-  inp.value='';renderBody();save();
-};
-
-window.setPlanFilter=function(f,el){
-  D.plans.filter=f;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
+// ── PLANS ────────────────────────────────────────────────
+function togglePlan(id){
+  var it = D.plans.items.find(function(x){return x.id===id}); if(!it) return;
+  it.done = !it.done; renderBody(); save();
+}
+function deletePlan(id){
+  D.plans.items = D.plans.items.filter(function(x){return x.id!==id});
+  renderBody(); save();
+}
+function addPlan(){
+  var v = document.getElementById('planInput').value.trim(); if(!v) return;
+  D.plans.items.push({id:D.plans.nid++, text:v, done:false, who:D.plans.selectedWho});
+  document.getElementById('planInput').value='';
+  renderBody(); save();
+}
+function setPlanFilter(f, el){
+  D.plans.filter = f;
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('factive')});
+  el.classList.add('factive');
   renderBody();
-};
+}
+function selectWho(w){
+  D.plans.selectedWho = w;
+  document.getElementById('wo1').className = 'who-opt'+(w==='p1'?' sel-p1':'');
+  document.getElementById('wo2').className = 'who-opt'+(w==='p2'?' sel-p2':'');
+  document.getElementById('woB').className = 'who-opt'+(w==='both'?' sel-both':'');
+}
 
-window.selectWho=function(w){
-  D.plans.selectedWho=w;
-  document.getElementById('wo1').className='who-opt'+(w==='p1'?' sel-p1':'');
-  document.getElementById('wo2').className='who-opt'+(w==='p2'?' sel-p2':'');
-  document.getElementById('woB').className='who-opt'+(w==='both'?' sel-both':'');
-};
+// ── MEDIA ────────────────────────────────────────────────
+function setMediaR(id, person, val){
+  var it = D.media.items.find(function(x){return x.id===id}); if(!it) return;
+  if(person===1) it.r1=val; else it.r2=val;
+  renderBody(); save();
+}
+function setMediaStatus(id, st){
+  var it = D.media.items.find(function(x){return x.id===id}); if(!it) return;
+  it.status = st; renderBody(); save();
+}
+function removeMedia(id){
+  if(!confirm('¿Eliminar?')) return;
+  D.media.items = D.media.items.filter(function(x){return x.id!==id});
+  renderBody(); save();
+}
+function addMedia(){
+  var title = document.getElementById('mTitle').value.trim();
+  var genre = document.getElementById('mGenre').value.trim();
+  if(!title){ alert('Ingresá un título'); return; }
+  D.media.items.push({id:D.media.nid++, title:title, type:D.media.newType, genre:genre, status:'pendiente', r1:0, r2:0});
+  document.getElementById('mTitle').value='';
+  document.getElementById('mGenre').value='';
+  renderBody(); save();
+}
+function setMediaFilter(f, el){
+  D.media.filter = f;
+  document.querySelectorAll('.mfilter-btn').forEach(function(b){b.classList.remove('factive')});
+  el.classList.add('factive');
+  renderBody();
+}
+function setTypeFilter(f, el){
+  D.media.typeFilter = f;
+  document.querySelectorAll('.tfilter-btn').forEach(function(b){b.classList.remove('factive')});
+  el.classList.add('factive');
+  renderBody();
+}
+function setNewType(t){
+  D.media.newType = t;
+  document.getElementById('ntSerie').className = 'type-opt'+(t==='serie'?' sel':'');
+  document.getElementById('ntPeli').className  = 'type-opt'+(t==='pelicula'?' sel':'');
+}
 
-function starsHtml(val,cls,fn){
-  let h='';
-  for(let i=1;i<=5;i++)h+=`<span class="${cls}${i<=val?' on':''}" onclick="${fn}(${i})">★</span>`;
+// ── RENDER HELPERS ───────────────────────────────────────
+function placeStarsHtml(val, placeId, person){
+  var h = '';
+  for(var i=1;i<=5;i++){
+    h += '<span class="st'+(i<=val?' on':'')+'" onclick="setPlaceR('+placeId+','+person+','+i+')">★</span>';
+  }
   return h;
 }
-
-function chipHtml(who){
-  if(who==='p1') return `<span class="proposed-chip chip-p1">propuso ${p1}</span>`;
-  if(who==='p2') return `<span class="proposed-chip chip-p2">propuso ${p2}</span>`;
-  return `<span class="proposed-chip chip-both">propusieron las dos</span>`;
-}
-
-function renderPlaces(){
-  const m=META[tab];
-  const d=D[tab];
-  const accent=ACCENTS[tab];
-  const places=d.places;
-  const total=places.length;
-  const totalIt=places.reduce((a,pl)=>a+pl.items.length,0);
-  const rated=places.filter(pl=>pl.r1||pl.r2);
-  const best=rated.length?rated.reduce((a,b)=>parseFloat(avgS(b.r1,b.r2)||0)>parseFloat(avgS(a.r1,a.r2)||0)?b:a):null;
-  const p1color=tab==='ice'?'#E8594A':'#555';
-
-  const stats=`<div class="stats-row">
-    <div class="stat"><div class="stat-num" style="color:${accent}">${total}</div><div class="stat-lbl">${tab==='ice'?'heladerías':'locales'}</div></div>
-    <div class="stat"><div class="stat-num" style="color:${accent}">${totalIt}</div><div class="stat-lbl">${m.itemsLbl.toLowerCase()}</div></div>
-    <div class="stat"><div class="stat-num" style="color:${accent};font-size:${best?'14px':'26px'};line-height:1.4">${best?best.name:'—'}</div><div class="stat-lbl">top local</div></div>
-  </div>`;
-
-  const cards=places.length?places.map(pl=>{
-    const av=avgS(pl.r1,pl.r2);
-    const both=pl.r1&&pl.r2;
-    const dis=both&&Math.abs(pl.r1-pl.r2)>=2;
-    const items=pl.items.map((it,ii)=>{
-      const ia=avgS(it.r1,it.r2);
-      const iboth=it.r1&&it.r2;
-      const idis=iboth&&Math.abs(it.r1-it.r2)>=2;
-      return `<div class="item-row">
-        <span class="item-name">${it.name}${idis?' <span class="disagree">distinto</span>':''}</span>
-        <div class="item-scorers">
-          <div class="scorer"><span class="scorer-lbl" style="color:${p1color}">${ini(p1)}</span><div class="scorer-stars">${starsHtml(it.r1,'ss',`(v)=>setItemR(${pl.id},${ii},1,v)`)}</div></div>
-          <div class="scorer"><span class="scorer-lbl" style="color:#378ADD">${ini(p2)}</span><div class="scorer-stars">${starsHtml(it.r2,'ss',`(v)=>setItemR(${pl.id},${ii},2,v)`)}</div></div>
-          ${ia?`<span class="item-avg" style="color:${accent}">★${ia}</span>`:`<span class="item-avg-none">—</span>`}
-        </div>
-      </div>`;
-    }).join('');
-    return `<div class="place-card">
-      <div class="place-head">
-        <div style="min-width:0;flex:1">
-          <div class="place-name">${m.emoji} ${pl.name}${dis?' <span class="disagree">distintos</span>':''}</div>
-          <div class="place-addr">📍 ${pl.addr}</div>
-        </div>
-        <div class="place-scores">
-          <div class="score-row"><span class="score-lbl" style="color:${p1color}">${p1}</span><div class="stars">${starsHtml(pl.r1,'st',`(v)=>setPlaceR(${pl.id},1,v)`)}</div></div>
-          <div class="score-row"><span class="score-lbl" style="color:#378ADD">${p2}</span><div class="stars">${starsHtml(pl.r2,'st',`(v)=>setPlaceR(${pl.id},2,v)`)}</div></div>
-          ${av?`<span class="prom">★ ${av}</span>`:`<span class="prom-none">sin puntuar</span>`}
-        </div>
-      </div>
-      <div class="items-body">
-        <div class="items-lbl">${m.itemsLbl}</div>
-        ${items||`<div style="font-size:12px;color:#ccc;padding:4px 0">Sin ${m.itemsLbl.toLowerCase()} cargadas</div>`}
-        <div class="add-row">
-          <input id="ai_${pl.id}" placeholder="Agregar ${m.itemsLbl.slice(0,-1).toLowerCase()}..." style="border-color:var(--border)" onkeydown="if(event.key==='Enter')addItem(${pl.id})"/>
-          <button class="btn-add" style="background:${accent}" onclick="addItem(${pl.id})">+ Agregar</button>
-        </div>
-      </div>
-      <div class="card-foot"><button class="btn-del" onclick="removePlace(${pl.id})">eliminar</button></div>
-    </div>`;
-  }).join('')
-  :`<div class="empty">Sin ${tab==='ice'?'heladerías':'locales'} aún. ¡Agregá el primero!</div>`;
-
-  return `${stats}<div class="sec-label">${tab==='ice'?'heladerías':'locales'}</div>${cards}
-    <div class="add-card">
-      <div class="add-card-title">+ ${m.addLbl}</div>
-      <div class="form-grid">
-        <div class="ff"><label>Nombre *</label><input id="fN" placeholder="${m.ph.name}"/></div>
-        <div class="ff"><label>Dirección *</label><input id="fA" placeholder="${m.ph.addr}"/></div>
-        <div class="ff full"><label>${m.itemsLbl} (por coma)</label><input id="fI" placeholder="${m.ph.items}"/></div>
-      </div>
-      <button class="btn-submit" style="background:${accent}" onclick="addPlace()">${m.addLbl}</button>
-    </div>`;
-}
-
-function renderPlansTab(){
-  const pd=D.plans;
-  const items=pd.items;
-  const total=items.length;
-  const done=items.filter(x=>x.done).length;
-  const pending=total-done;
-  const pct=total?Math.round(done/total*100):0;
-  const f=pd.filter||'all';
-  const sw=pd.selectedWho||'both';
-
-  let filtered=items;
-  if(f==='pending') filtered=items.filter(x=>!x.done);
-  else if(f==='done') filtered=items.filter(x=>x.done);
-  else if(f==='p1') filtered=items.filter(x=>x.who==='p1'||x.who==='both');
-  else if(f==='p2') filtered=items.filter(x=>x.who==='p2'||x.who==='both');
-
-  const filterBtns=[
-    {key:'all',label:'Todos'},
-    {key:'pending',label:'Pendientes'},
-    {key:'done',label:'Hechos'},
-    {key:'p1',label:`De ${p1}`},
-    {key:'p2',label:`De ${p2}`},
-  ].map(b=>`<button class="filter-btn${f===b.key?' active':''}" style="${f===b.key?'background:#6C63FF;color:#fff;border-color:#6C63FF':''}" onclick="setPlanFilter('${b.key}',this)">${b.label}</button>`).join('');
-
-  const planItems=filtered.length?filtered.map(it=>`
-    <div class="plan-item${it.done?' done':''}">
-      <button class="check-btn${it.done?' checked':''}" style="${it.done?'background:#6C63FF;border-color:#6C63FF':''}" onclick="togglePlan(${it.id})">${it.done?'✓':''}</button>
-      <span class="plan-text">${it.text}</span>
-      ${chipHtml(it.who)}
-      <button class="plan-del" onclick="deletePlan(${it.id})">×</button>
-    </div>`).join('')
-  :`<div class="empty">Sin planes en esta categoría</div>`;
-
-  return `
-    <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:#6C63FF"></div></div>
-    <div class="filter-row">${filterBtns}</div>
-    <div class="stats-row">
-      <div class="stat"><div class="stat-num" style="color:#6C63FF">${total}</div><div class="stat-lbl">total</div></div>
-      <div class="stat"><div class="stat-num" style="color:#6C63FF">${pending}</div><div class="stat-lbl">pendientes</div></div>
-      <div class="stat"><div class="stat-num" style="color:#6C63FF">${done}</div><div class="stat-lbl">hechos ✓</div></div>
-    </div>
-    <div id="planList">${planItems}</div>
-    <div class="add-card">
-      <div class="add-card-title">+ Agregar plan</div>
-      <div class="add-row" style="margin-bottom:12px">
-        <input id="planInput" placeholder="Ej: ir a la feria de San Telmo..." onkeydown="if(event.key==='Enter')addPlan()"/>
-      </div>
-      <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">¿Quién lo propone?</div>
-      <div class="who-row">
-        <button class="who-opt${sw==='p1'?' sel-p1':''}" id="wo1" onclick="selectWho('p1')">${p1}</button>
-        <button class="who-opt${sw==='p2'?' sel-p2':''}" id="wo2" onclick="selectWho('p2')">${p2}</button>
-        <button class="who-opt${sw==='both'?' sel-both':''}" id="woB" onclick="selectWho('both')">Las dos</button>
-      </div>
-      <button class="btn-submit" style="background:#6C63FF" onclick="addPlan()">Agregar plan</button>
-    </div>`;
-}
-
-function renderBody(){
-  document.getElementById('bodyContent').innerHTML = tab==='plans' ? renderPlansTab() : renderPlaces();
-}
-
-onSnapshot(docRef,(snap)=>{
-  if(pendingSave)return;
-  document.getElementById('loadingEl').style.display='none';
-  document.getElementById('mainEl').style.display='block';
-  if(snap.exists()){
-    const data=snap.data();
-    if(data.D) D=data.D;
-    if(!D.plans) D.plans={items:[],nid:1,filter:'all',selectedWho:'both'};
-    if(data.p1){p1=data.p1;document.getElementById('nameP1').value=p1;}
-    if(data.p2){p2=data.p2;document.getElementById('nameP2').value=p2;}
-  } else {
-    save();
+function itemStarsHtml(val, placeId, itemIdx, person){
+  var h = '';
+  for(var i=1;i<=5;i++){
+    h += '<span class="ss'+(i<=val?' on':'')+'" onclick="setItemR('+placeId+','+itemIdx+','+person+','+i+')">★</span>';
   }
-  document.getElementById('av1').textContent=ini(p1);
-  document.getElementById('av2').textContent=ini(p2);
+  return h;
+}
+function mediaStarsHtml(val, mediaId, person){
+  var h = '';
+  for(var i=1;i<=5;i++){
+    h += '<span class="st'+(i<=val?' on':'')+'" onclick="setMediaR('+mediaId+','+person+','+i+')">★</span>';
+  }
+  return h;
+}
+function chipHtml(who){
+  if(who==='p1') return '<span class="proposed-chip chip-p1">propuso '+p1+'</span>';
+  if(who==='p2') return '<span class="proposed-chip chip-p2">propuso '+p2+'</span>';
+  return '<span class="proposed-chip chip-both">las dos</span>';
+}
+
+// ── RENDER PLACES ────────────────────────────────────────
+function renderPlaces(){
+  var m = META[tab];
+  var d = D[tab];
+  var accent = ACCENTS[tab];
+  var places = d.places;
+  var p1color = tab==='ice' ? '#E8594A' : '#555';
+  var total = places.length;
+  var totalIt = places.reduce(function(a,pl){return a+pl.items.length},0);
+  var rated = places.filter(function(pl){return pl.r1||pl.r2});
+  var best = rated.length ? rated.reduce(function(a,b){return parseFloat(avgS(b.r1,b.r2)||0)>parseFloat(avgS(a.r1,a.r2)||0)?b:a}) : null;
+
+  var stats = '<div class="stats-row">'
+    +'<div class="stat"><div class="stat-num" style="color:'+accent+'">'+total+'</div><div class="stat-lbl">'+(tab==='ice'?'heladerías':'locales')+'</div></div>'
+    +'<div class="stat"><div class="stat-num" style="color:'+accent+'">'+totalIt+'</div><div class="stat-lbl">'+m.itemsLbl.toLowerCase()+'</div></div>'
+    +'<div class="stat"><div class="stat-num" style="color:'+accent+';font-size:'+(best?'14px':'26px')+';line-height:1.4">'+(best?best.name:'—')+'</div><div class="stat-lbl">top local</div></div>'
+    +'</div>';
+
+  var cards = places.length ? places.map(function(pl){
+    var av = avgS(pl.r1, pl.r2);
+    var both = pl.r1&&pl.r2;
+    var dis = both&&Math.abs(pl.r1-pl.r2)>=2;
+    var itemsHtml = pl.items.map(function(it,ii){
+      var ia = avgS(it.r1,it.r2);
+      var iboth = it.r1&&it.r2;
+      var idis = iboth&&Math.abs(it.r1-it.r2)>=2;
+      return '<div class="item-row">'
+        +'<span class="item-name">'+it.name+(idis?' <span class="disagree">distinto</span>':'')+'</span>'
+        +'<div class="item-scorers">'
+        +'<div class="scorer"><span class="scorer-lbl" style="color:'+p1color+'">'+ini(p1)+'</span>'
+        +'<div class="scorer-stars">'+itemStarsHtml(it.r1,pl.id,ii,1)+'</div></div>'
+        +'<div class="scorer"><span class="scorer-lbl" style="color:#378ADD">'+ini(p2)+'</span>'
+        +'<div class="scorer-stars">'+itemStarsHtml(it.r2,pl.id,ii,2)+'</div></div>'
+        +(ia?'<span class="item-avg" style="color:'+accent+'">★'+ia+'</span>':'<span class="item-avg-none">—</span>')
+        +'</div></div>';
+    }).join('');
+    return '<div class="place-card">'
+      +'<div class="place-head">'
+      +'<div style="min-width:0;flex:1">'
+      +'<div class="place-name">'+m.emoji+' '+pl.name+(dis?' <span class="disagree">distintos</span>':'')+'</div>'
+      +'<div class="place-addr">📍 '+pl.addr+'</div>'
+      +'</div>'
+      +'<div class="place-scores">'
+      +'<div class="score-row"><span class="score-lbl" style="color:'+p1color+'">'+p1+'</span><div class="stars">'+placeStarsHtml(pl.r1,pl.id,1)+'</div></div>'
+      +'<div class="score-row"><span class="score-lbl" style="color:#378ADD">'+p2+'</span><div class="stars">'+placeStarsHtml(pl.r2,pl.id,2)+'</div></div>'
+      +(av?'<span class="prom">★ '+av+'</span>':'<span class="prom-none">sin puntuar</span>')
+      +'</div></div>'
+      +'<div class="items-body"><div class="items-lbl">'+m.itemsLbl+'</div>'
+      +(itemsHtml||'<div style="font-size:12px;color:#ccc;padding:4px 0">Sin '+m.itemsLbl.toLowerCase()+' cargadas</div>')
+      +'<div class="add-row"><input id="ai_'+pl.id+'" placeholder="Agregar '+m.itemsLbl.slice(0,-1).toLowerCase()+'..." onkeydown="if(event.key===\'Enter\')addItem('+pl.id+')">'
+      +'<button class="btn-add" style="background:'+accent+'" onclick="addItem('+pl.id+')">+ Agregar</button></div>'
+      +'</div>'
+      +'<div class="card-foot"><button class="btn-del-sm" onclick="removePlace('+pl.id+')">eliminar</button></div>'
+      +'</div>';
+  }).join('') : '<div class="empty">Sin '+(tab==='ice'?'heladerías':'locales')+' aún. ¡Agregá el primero!</div>';
+
+  return stats+'<div class="sec-label">'+(tab==='ice'?'heladerías':'locales')+'</div>'+cards
+    +'<div class="add-card"><div class="add-card-title">+ '+m.addLbl+'</div>'
+    +'<div class="form-grid">'
+    +'<div class="ff"><label>Nombre *</label><input id="fN" placeholder="'+m.ph.name+'"></div>'
+    +'<div class="ff"><label>Dirección *</label><input id="fA" placeholder="'+m.ph.addr+'"></div>'
+    +'<div class="ff full"><label>'+m.itemsLbl+' (por coma)</label><input id="fI" placeholder="'+m.ph.items+'"></div>'
+    +'</div><button class="btn-submit" style="background:'+accent+'" onclick="addPlace()">'+m.addLbl+'</button></div>';
+}
+
+// ── RENDER PLANS ─────────────────────────────────────────
+function renderPlansTab(){
+  var pd = D.plans;
+  var items = pd.items;
+  var total = items.length;
+  var done = items.filter(function(x){return x.done}).length;
+  var pending = total-done;
+  var pct = total ? Math.round(done/total*100) : 0;
+  var f = pd.filter||'all';
+  var sw = pd.selectedWho||'both';
+
+  var filtered = items;
+  if(f==='pending') filtered = items.filter(function(x){return !x.done});
+  else if(f==='done') filtered = items.filter(function(x){return x.done});
+  else if(f==='p1') filtered = items.filter(function(x){return x.who==='p1'||x.who==='both'});
+  else if(f==='p2') filtered = items.filter(function(x){return x.who==='p2'||x.who==='both'});
+
+  var filters = [
+    {key:'all',label:'Todos'},{key:'pending',label:'Pendientes'},{key:'done',label:'Hechos'},
+    {key:'p1',label:'De '+p1},{key:'p2',label:'De '+p2}
+  ].map(function(b){
+    return '<button class="filter-btn'+(f===b.key?' factive':'')+'" onclick="setPlanFilter(\''+b.key+'\',this)">'+b.label+'</button>';
+  }).join('');
+
+  var planItems = filtered.length ? filtered.map(function(it){
+    return '<div class="plan-item'+(it.done?' done':'')+'">'
+      +'<button class="check-btn'+(it.done?' checked':'')+'" onclick="togglePlan('+it.id+')">'+(it.done?'✓':'')+'</button>'
+      +'<span class="plan-text">'+it.text+'</span>'
+      +chipHtml(it.who)
+      +'<button class="plan-del" onclick="deletePlan('+it.id+')">×</button>'
+      +'</div>';
+  }).join('') : '<div class="empty">Sin planes en esta categoría</div>';
+
+  return '<div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%;background:#6C63FF"></div></div>'
+    +'<div class="filter-row">'+filters+'</div>'
+    +'<div class="stats-row">'
+    +'<div class="stat"><div class="stat-num" style="color:#6C63FF">'+total+'</div><div class="stat-lbl">total</div></div>'
+    +'<div class="stat"><div class="stat-num" style="color:#6C63FF">'+pending+'</div><div class="stat-lbl">pendientes</div></div>'
+    +'<div class="stat"><div class="stat-num" style="color:#6C63FF">'+done+'</div><div class="stat-lbl">hechos ✓</div></div>'
+    +'</div>'
+    +'<div>'+planItems+'</div>'
+    +'<div class="add-card"><div class="add-card-title">+ Agregar plan</div>'
+    +'<div class="add-row" style="margin-bottom:12px"><input id="planInput" style="flex:1;border-radius:20px;padding:7px 12px;border:1px solid var(--border);background:#FAFAFA;color:var(--text);outline:none;font-family:Inter,sans-serif;font-size:13px" placeholder="Ej: ir a la feria de San Telmo..." onkeydown="if(event.key===\'Enter\')addPlan()"></div>'
+    +'<div class="who-label">¿Quién lo propone?</div>'
+    +'<div class="who-row">'
+    +'<button class="who-opt'+(sw==='p1'?' sel-p1':'')+'" id="wo1" onclick="selectWho(\'p1\')">'+p1+'</button>'
+    +'<button class="who-opt'+(sw==='p2'?' sel-p2':'')+'" id="wo2" onclick="selectWho(\'p2\')">'+p2+'</button>'
+    +'<button class="who-opt'+(sw==='both'?' sel-both':'')+'" id="woB" onclick="selectWho(\'both\')">Las dos</button>'
+    +'</div>'
+    +'<button class="btn-submit" style="background:#6C63FF" onclick="addPlan()">Agregar plan</button></div>';
+}
+
+// ── RENDER MEDIA ─────────────────────────────────────────
+function renderMediaTab(){
+  var md = D.media;
+  var items = md.items;
+  var f = md.filter||'all';
+  var tf = md.typeFilter||'all';
+  var nt = md.newType||'serie';
+  var p1color = '#E91E8C';
+
+  var filtered = items;
+  if(f==='pendiente') filtered = filtered.filter(function(x){return x.status==='pendiente'});
+  else if(f==='viendo') filtered = filtered.filter(function(x){return x.status==='viendo'});
+  else if(f==='vista') filtered = filtered.filter(function(x){return x.status==='vista'});
+  if(tf==='serie') filtered = filtered.filter(function(x){return x.type==='serie'});
+  else if(tf==='pelicula') filtered = filtered.filter(function(x){return x.type==='pelicula'});
+
+  var total = items.length;
+  var pendiente = items.filter(function(x){return x.status==='pendiente'}).length;
+  var vistas = items.filter(function(x){return x.status==='vista'}).length;
+
+  var statusFilters = [
+    {key:'all',label:'Todos'},{key:'pendiente',label:'📌 Pendiente'},{key:'viendo',label:'▶️ Viendo'},{key:'vista',label:'✅ Vista'}
+  ].map(function(b){
+    return '<button class="filter-btn mfilter-btn'+(f===b.key?' factive':'')+'" onclick="setMediaFilter(\''+b.key+'\',this)">'+b.label+'</button>';
+  }).join('');
+
+  var typeFilters = [
+    {key:'all',label:'Todos'},{key:'serie',label:'📺 Series'},{key:'pelicula',label:'🎬 Películas'}
+  ].map(function(b){
+    return '<button class="filter-btn tfilter-btn'+(tf===b.key?' factive':'')+'" onclick="setTypeFilter(\''+b.key+'\',this)">'+b.label+'</button>';
+  }).join('');
+
+  var statusLabel = {pendiente:'📌 Pendiente', viendo:'▶️ Viendo', vista:'✅ Vista'};
+  var statusClass = {pendiente:'sel-pendiente', viendo:'sel-viendo', vista:'sel-vista'};
+
+  var cards = filtered.length ? filtered.map(function(it){
+    var av = avgS(it.r1,it.r2);
+    var both = it.r1&&it.r2;
+    var dis = both&&Math.abs(it.r1-it.r2)>=2;
+    var statusBtns = ['pendiente','viendo','vista'].map(function(s){
+      return '<button class="status-chip'+(it.status===s?' '+statusClass[s]:'')+'" onclick="setMediaStatus('+it.id+',\''+s+'\')">'+statusLabel[s]+'</button>';
+    }).join('');
+    return '<div class="media-card">'
+      +'<div class="media-head">'
+      +'<div class="media-info">'
+      +'<div class="media-title-txt">'+(it.type==='serie'?'📺':'🎬')+' '+it.title+(dis?' <span class="disagree">distinto</span>':'')
+      +'<span class="media-type-badge">'+(it.type==='serie'?'Serie':'Película')+'</span></div>'
+      +(it.genre?'<div class="media-meta">'+it.genre+'</div>':'')
+      +'</div>'
+      +'<div class="media-scores">'
+      +'<div class="score-row"><span class="score-lbl" style="color:'+p1color+'">'+p1+'</span><div class="stars">'+mediaStarsHtml(it.r1,it.id,1)+'</div></div>'
+      +'<div class="score-row"><span class="score-lbl" style="color:#378ADD">'+p2+'</span><div class="stars">'+mediaStarsHtml(it.r2,it.id,2)+'</div></div>'
+      +(av?'<span class="prom">★ '+av+'</span>':'<span class="prom-none">sin puntuar</span>')
+      +'</div></div>'
+      +'<div class="status-row">'+statusBtns
+      +'<button class="btn-del-sm" style="margin-left:auto" onclick="removeMedia('+it.id+')">eliminar</button>'
+      +'</div>'
+      +'</div>';
+  }).join('') : '<div class="empty">Sin títulos en esta categoría</div>';
+
+  return '<div class="stats-row">'
+    +'<div class="stat"><div class="stat-num" style="color:#E91E8C">'+total+'</div><div class="stat-lbl">títulos</div></div>'
+    +'<div class="stat"><div class="stat-num" style="color:#E91E8C">'+pendiente+'</div><div class="stat-lbl">pendientes</div></div>'
+    +'<div class="stat"><div class="stat-num" style="color:#E91E8C">'+vistas+'</div><div class="stat-lbl">vistas ✓</div></div>'
+    +'</div>'
+    +'<div class="filter-row">'+statusFilters+'</div>'
+    +'<div class="filter-row">'+typeFilters+'</div>'
+    +'<div class="sec-label">títulos</div>'
+    +cards
+    +'<div class="add-card"><div class="add-card-title">+ Agregar título</div>'
+    +'<div class="who-label">Tipo</div>'
+    +'<div class="type-toggle">'
+    +'<button class="type-opt'+(nt==='serie'?' sel':'')+'" id="ntSerie" onclick="setNewType(\'serie\')">📺 Serie</button>'
+    +'<button class="type-opt'+(nt==='pelicula'?' sel':'')+'" id="ntPeli" onclick="setNewType(\'pelicula\')">🎬 Película</button>'
+    +'</div>'
+    +'<div class="form-grid">'
+    +'<div class="ff"><label>Título *</label><input id="mTitle" placeholder="Ej: Breaking Bad"></div>'
+    +'<div class="ff"><label>Género</label><input id="mGenre" placeholder="Ej: Drama, Comedia..."></div>'
+    +'</div>'
+    +'<button class="btn-submit" style="background:#E91E8C" onclick="addMedia()">Agregar título</button></div>';
+}
+
+// ── MAIN RENDER ──────────────────────────────────────────
+function renderBody(){
+  var html;
+  if(tab==='plans') html = renderPlansTab();
+  else if(tab==='media') html = renderMediaTab();
+  else html = renderPlaces();
+  document.getElementById('bodyContent').innerHTML = html;
+}
+
+// ── FIREBASE SYNC ────────────────────────────────────────
+docRef.onSnapshot(function(snap){
+  if(pendingSave) return;
+  document.getElementById('loadingEl').style.display = 'none';
+  document.getElementById('mainEl').style.display = 'block';
+  if(snap.exists){
+    var data = snap.data();
+    if(data.D) D = data.D;
+    if(!D.plans) D.plans = {items:[],nid:1,filter:'all',selectedWho:'both'};
+    if(!D.media) D.media = {items:[],nid:1,filter:'all',typeFilter:'all',newType:'serie'};
+    if(data.p1){ p1=data.p1; document.getElementById('nameP1').value=p1; }
+    if(data.p2){ p2=data.p2; document.getElementById('nameP2').value=p2; }
+  } else {
+    docRef.set({D:D, p1:p1, p2:p2});
+  }
+  document.getElementById('av1').textContent = ini(p1);
+  document.getElementById('av2').textContent = ini(p2);
   renderBody();
 });
 </script>
