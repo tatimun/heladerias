@@ -130,11 +130,11 @@
     <div class="names-row">
       <div class="nfield">
         <div class="av av1" id="av1txt">P1</div>
-        <input id="nameP1" value="Persona 1" oninput="updateNames()" placeholder="Tu nombre..." />
+        <input id="nameP1" value="Persona 1" oninput="updateNames()" onblur="updateNames()" placeholder="Tu nombre..." />
       </div>
       <div class="nfield">
         <div class="av av2" id="av2txt">P2</div>
-        <input id="nameP2" value="Persona 2" oninput="updateNames()" placeholder="Tu nombre..." />
+        <input id="nameP2" value="Persona 2" oninput="updateNames()" onblur="updateNames()" placeholder="Tu nombre..." />
       </div>
     </div>
 
@@ -239,18 +239,18 @@ async function save() {
   }
 }
 
-function scheduleSave() {
+function scheduleSave(immediate) {
   localChange = true;
   clearTimeout(saveTimer);
   setSyncStatus(true);
-  saveTimer = setTimeout(() => { localChange = false; save(); }, 800);
+  saveTimer = setTimeout(() => { localChange = false; save(); }, immediate ? 0 : 800);
 }
 
 window.updateNames = function() {
   document.getElementById('av1txt').textContent = ini(n1());
   document.getElementById('av2txt').textContent = ini(n2());
   render();
-  scheduleSave();
+  scheduleSave(true);
 };
 
 window.setShopR = function(id, p, v) {
