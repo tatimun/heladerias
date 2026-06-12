@@ -12,10 +12,6 @@
     --text: #1a1a18; --text2: #6b6b66; --text3: #a0a09a;
     --border: rgba(0,0,0,.12); --border2: rgba(0,0,0,.22);
     --radius-md: 8px; --radius-lg: 12px;
-    --pink-bg: #FBEAF0; --pink: #993556; --pink-border: #F4C0D1;
-    --blue-bg: #E6F1FB; --blue: #185FA5; --blue-border: #B5D4F4;
-    --amber-bg: #FAEEDA; --amber: #854F0B;
-    --green-bg: #EAF3DE; --green: #3B6D11;
     --star-on: #E9902A; --star-off: #d0d0cc;
   }
   @media (prefers-color-scheme: dark) {
@@ -23,10 +19,6 @@
       --bg: #1e1e1c; --bg2: #2a2a27; --bg3: #323230;
       --text: #f0efe8; --text2: #a0a09a; --text3: #6b6b66;
       --border: rgba(255,255,255,.12); --border2: rgba(255,255,255,.22);
-      --pink-bg: #3a1a26; --pink: #F4C0D1; --pink-border: #72243E;
-      --blue-bg: #0c2440; --blue: #B5D4F4; --blue-border: #0C447C;
-      --amber-bg: #2e1e06; --amber: #FAC775;
-      --green-bg: #162408; --green: #C0DD97;
       --star-off: #555;
     }
   }
@@ -34,7 +26,7 @@
   .app { max-width: 680px; margin: 0 auto; }
   .header { text-align: center; padding: 2rem 0 1.5rem; }
   .header-icon { font-size: 48px; line-height: 1; margin-bottom: 10px; }
-  .header h1 { font-size: 26px; font-weight: 600; color: var(--text); }
+  .header h1 { font-size: 26px; font-weight: 600; }
   .header p { font-size: 15px; color: var(--text2); margin-top: 5px; }
   .loading { text-align: center; padding: 3rem 0; color: var(--text2); font-size: 15px; }
   .spinner { display: inline-block; width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: #D4537E; border-radius: 50%; animation: spin .7s linear infinite; margin-bottom: 12px; }
@@ -43,32 +35,32 @@
   .nfield { flex: 1; display: flex; align-items: center; gap: 9px; background: var(--bg); border-radius: var(--radius-md); padding: 8px 13px; border: 0.5px solid var(--border); }
   .nfield input { border: none; background: transparent; font-size: 14px; font-weight: 500; color: var(--text); width: 100%; outline: none; }
   .av { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
-  .av1 { background: var(--pink-bg); color: var(--pink); }
-  .av2 { background: var(--blue-bg); color: var(--blue); }
+  .av1 { background: #FBEAF0; color: #993556; }
+  .av2 { background: #E6F1FB; color: #185FA5; }
   .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 1.25rem; }
   .stat { background: var(--bg); border-radius: var(--radius-md); padding: 12px; text-align: center; border: 0.5px solid var(--border); }
-  .stat-num { font-size: 22px; font-weight: 600; color: var(--text); }
+  .stat-num { font-size: 22px; font-weight: 600; }
   .stat-lbl { font-size: 12px; color: var(--text2); margin-top: 2px; }
   .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-  .sec-title { font-size: 17px; font-weight: 600; color: var(--text); }
+  .sec-title { font-size: 17px; font-weight: 600; }
   .sort-sel { font-size: 13px; padding: 6px 10px; border-radius: var(--radius-md); border: 0.5px solid var(--border); background: var(--bg); color: var(--text); cursor: pointer; }
   .shop-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1rem; transition: border-color .15s; }
   .shop-card:hover { border-color: var(--border2); }
   .shop-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; gap: 12px; }
   .shop-info { flex: 1; min-width: 0; }
-  .shop-name { font-size: 16px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .shop-name { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .shop-addr { font-size: 13px; color: var(--text2); margin-top: 3px; display: flex; align-items: center; gap: 4px; }
   .shop-ratings { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; flex-shrink: 0; }
   .duo-row { display: flex; align-items: center; gap: 7px; }
   .duo-lbl { font-size: 11px; font-weight: 500; min-width: 58px; text-align: right; white-space: nowrap; }
   .stars-inline { display: flex; gap: 2px; }
-  .star { font-size: 15px; cursor: pointer; color: var(--star-off); transition: transform .1s, color .1s; line-height: 1; }
+  .star { font-size: 15px; cursor: pointer; color: var(--star-off); transition: transform .1s; line-height: 1; }
   .star:hover { transform: scale(1.2); }
   .star.on { color: var(--star-on); }
   .prom-badge { font-size: 12px; font-weight: 500; padding: 3px 8px; border-radius: 12px; }
-  .prom-both { background: var(--green-bg); color: var(--green); }
+  .prom-both { background: #EAF3DE; color: #3B6D11; }
   .prom-one { background: var(--bg2); color: var(--text2); }
-  .disagree-tag { font-size: 11px; background: var(--amber-bg); color: var(--amber); padding: 2px 7px; border-radius: 10px; }
+  .disagree-tag { font-size: 11px; background: #FAEEDA; color: #854F0B; padding: 2px 7px; border-radius: 10px; }
   .fl-section-title { font-size: 12px; font-weight: 500; color: var(--text2); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .5px; }
   .flavor-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
   .flavor-row { display: flex; align-items: center; gap: 8px; padding: 8px 11px; border-radius: var(--radius-md); border: 0.5px solid transparent; flex-wrap: wrap; }
@@ -77,38 +69,34 @@
   .p-score { display: flex; flex-direction: column; align-items: center; gap: 2px; }
   .p-score-lbl { font-size: 10px; font-weight: 600; }
   .p-score-stars { display: flex; gap: 1px; }
-  .psc-star { font-size: 14px; cursor: pointer; color: var(--star-off); transition: transform .1s, color .1s; line-height: 1; }
+  .psc-star { font-size: 14px; cursor: pointer; color: var(--star-off); transition: transform .1s; line-height: 1; }
   .psc-star:hover { transform: scale(1.15); }
   .psc-star.on { color: var(--star-on); }
   .fl-avg { font-size: 12px; font-weight: 500; min-width: 38px; text-align: center; }
   .add-fl-row { display: flex; gap: 6px; margin-bottom: 10px; }
   .add-fl-row input { flex: 1; font-size: 13px; padding: 7px 10px; border-radius: var(--radius-md); border: 0.5px solid var(--border); background: var(--bg2); color: var(--text); outline: none; }
   .add-fl-row input::placeholder { color: var(--text3); }
-  .add-fl-row input:focus { border-color: var(--border2); }
   .btn-icon { padding: 7px 13px; font-size: 13px; border-radius: var(--radius-md); border: 0.5px solid var(--border2); background: transparent; color: var(--text); cursor: pointer; }
   .btn-icon:hover { background: var(--bg2); }
   .shop-foot { display: flex; justify-content: flex-end; }
   .btn-del { padding: 5px 12px; font-size: 13px; border-radius: var(--radius-md); border: 0.5px solid var(--border); background: transparent; color: var(--text2); cursor: pointer; }
   .btn-del:hover { background: #fde8e8; color: #a32d2d; border-color: #f09595; }
   .add-section { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; margin-top: 1rem; }
-  .add-title { font-size: 15px; font-weight: 600; margin-bottom: 13px; color: var(--text); }
+  .add-title { font-size: 15px; font-weight: 600; margin-bottom: 13px; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
   .ff { display: flex; flex-direction: column; gap: 4px; }
   .ff label { font-size: 12px; color: var(--text2); font-weight: 500; }
   .ff input { font-size: 13px; padding: 8px 10px; border-radius: var(--radius-md); border: 0.5px solid var(--border); background: var(--bg2); color: var(--text); outline: none; }
   .ff input::placeholder { color: var(--text3); }
-  .ff input:focus { border-color: var(--border2); }
   .ff.full { grid-column: 1 / -1; }
-  .btn-primary { padding: 9px 20px; font-size: 14px; font-weight: 600; border-radius: var(--radius-md); border: none; background: #D4537E; color: #fff; cursor: pointer; transition: opacity .15s; }
+  .btn-primary { padding: 9px 20px; font-size: 14px; font-weight: 600; border-radius: var(--radius-md); border: none; background: #D4537E; color: #fff; cursor: pointer; }
   .btn-primary:hover { opacity: .85; }
-  .empty-msg { text-align: center; padding: 2.5rem 0; color: var(--text2); font-size: 15px; }
-  .sync-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #3B6D11; margin-right: 5px; vertical-align: middle; }
+  .sync-status { font-size: 12px; color: var(--text2); text-align: right; margin-bottom: 8px; min-height: 18px; display: flex; align-items: center; justify-content: flex-end; gap: 5px; }
+  .sync-dot { width: 7px; height: 7px; border-radius: 50%; background: #3B6D11; flex-shrink: 0; }
   .sync-dot.saving { background: #E9902A; }
-  .sync-status { font-size: 12px; color: var(--text2); text-align: right; margin-bottom: 8px; min-height: 18px; }
   @media (max-width: 500px) {
     .form-row { grid-template-columns: 1fr; }
     .ff.full { grid-column: 1; }
-    .flavor-scores { gap: 7px; }
     .shop-top { flex-direction: column; }
     .shop-ratings { align-items: flex-start; }
   }
@@ -130,15 +118,17 @@
     <div class="names-row">
       <div class="nfield">
         <div class="av av1" id="av1txt">P1</div>
-        <input id="nameP1" value="Persona 1" oninput="updateNames()" onblur="updateNames()" placeholder="Tu nombre..." />
+        <input id="nameP1" value="Persona 1" oninput="updateNames()" placeholder="Tu nombre..." />
       </div>
       <div class="nfield">
         <div class="av av2" id="av2txt">P2</div>
-        <input id="nameP2" value="Persona 2" oninput="updateNames()" onblur="updateNames()" placeholder="Tu nombre..." />
+        <input id="nameP2" value="Persona 2" oninput="updateNames()" placeholder="Tu nombre..." />
       </div>
     </div>
 
-    <div class="sync-status" id="syncStatus"><span class="sync-dot" id="syncDot"></span>Sincronizado</div>
+    <div class="sync-status" id="syncStatus">
+      <span class="sync-dot" id="syncDot"></span><span id="syncTxt">Sincronizado</span>
+    </div>
 
     <div class="stats-row" id="statsRow"></div>
 
@@ -207,7 +197,7 @@ const DEFAULT_SHOPS = [
 let shops = [];
 let nid = 4;
 let saveTimer = null;
-let localChange = false;
+let pendingSave = false;
 
 function n1() { return document.getElementById('nameP1').value || 'Persona 1'; }
 function n2() { return document.getElementById('nameP2').value || 'Persona 2'; }
@@ -220,51 +210,45 @@ function avgStr(r1, r2) {
 }
 
 function setSyncStatus(saving) {
-  const dot = document.getElementById('syncDot');
-  const lbl = document.getElementById('syncStatus');
-  dot.className = 'sync-dot' + (saving ? ' saving' : '');
-  lbl.innerHTML = `<span class="sync-dot${saving?' saving':''}"></span>${saving ? 'Guardando...' : 'Sincronizado'}`;
+  document.getElementById('syncDot').className = 'sync-dot' + (saving ? ' saving' : '');
+  document.getElementById('syncTxt').textContent = saving ? 'Guardando...' : 'Sincronizado';
 }
 
-async function save() {
-  setSyncStatus(true);
-  const p1name = document.getElementById('nameP1').value || 'Persona 1';
-  const p2name = document.getElementById('nameP2').value || 'Persona 2';
-  try {
-    await setDoc(docRef, { shops, nid, p1name, p2name });
-    setSyncStatus(false);
-  } catch(e) {
-    console.error(e);
-    setSyncStatus(false);
-  }
-}
-
-function scheduleSave(immediate) {
-  localChange = true;
+function save() {
+  pendingSave = true;
   clearTimeout(saveTimer);
   setSyncStatus(true);
-  saveTimer = setTimeout(() => { localChange = false; save(); }, immediate ? 0 : 800);
+  saveTimer = setTimeout(async () => {
+    try {
+      await setDoc(docRef, {
+        shops, nid,
+        p1name: n1(),
+        p2name: n2()
+      });
+    } catch(e) { console.error(e); }
+    pendingSave = false;
+    setSyncStatus(false);
+  }, 500);
 }
 
 window.updateNames = function() {
   document.getElementById('av1txt').textContent = ini(n1());
   document.getElementById('av2txt').textContent = ini(n2());
-  render();
-  scheduleSave(true);
+  render(); save();
 };
 
 window.setShopR = function(id, p, v) {
   const s = shops.find(x=>x.id===id);
   if(!s) return;
   if(p===1) s.r1=v; else s.r2=v;
-  render(); scheduleSave();
+  render(); save();
 };
 
 window.setFlavorR = function(id, fi, p, v) {
   const s = shops.find(x=>x.id===id);
   if(!s) return;
   if(p===1) s.flavors[fi].r1=v; else s.flavors[fi].r2=v;
-  render(); scheduleSave();
+  render(); save();
 };
 
 window.addFlav = function(id) {
@@ -273,26 +257,26 @@ window.addFlav = function(id) {
   if(!v) return;
   shops.find(x=>x.id===id).flavors.push({name:v,r1:0,r2:0});
   inp.value = '';
-  render(); scheduleSave();
+  render(); save();
 };
 
 window.removeShop = function(id) {
   if(!confirm('¿Eliminar esta heladería?')) return;
   shops = shops.filter(x=>x.id!==id);
-  render(); scheduleSave();
+  render(); save();
 };
 
 window.addShop = function() {
   const name = document.getElementById('nN').value.trim();
   const addr = document.getElementById('nA').value.trim();
-  const fs = document.getElementById('nF').value.trim();
+  const fs   = document.getElementById('nF').value.trim();
   if(!name||!addr) { alert('Completá nombre y dirección'); return; }
   const flavors = fs ? fs.split(',').map(x=>({name:x.trim(),r1:0,r2:0})).filter(x=>x.name) : [];
   shops.push({id:nid++,name,address:addr,r1:0,r2:0,flavors});
   document.getElementById('nN').value = '';
   document.getElementById('nA').value = '';
   document.getElementById('nF').value = '';
-  render(); scheduleSave();
+  render(); save();
 };
 
 function shopStarsHtml(val, id, p) {
@@ -318,7 +302,7 @@ function render() {
 
   const cont = document.getElementById('list');
   if(!sorted.length) {
-    cont.innerHTML = '<div class="empty-msg">Sin heladerías aún. ¡Agregá la primera!</div>';
+    cont.innerHTML = '<div style="text-align:center;padding:2.5rem 0;color:var(--text2)">Sin heladerías aún. ¡Agregá la primera!</div>';
     updateStats(); return;
   }
 
@@ -326,14 +310,13 @@ function render() {
     const avg = avgStr(s.r1, s.r2);
     const both = s.r1 && s.r2;
     const disagree = both && Math.abs(s.r1-s.r2) >= 2;
-
     const flavHtml = s.flavors.map((f,i) => {
       const c = FC[i % FC.length];
       const fa = avgStr(f.r1, f.r2);
       const fboth = f.r1 && f.r2;
       const fdis = fboth && Math.abs(f.r1-f.r2) >= 2;
       return `<div class="flavor-row" style="background:${c.bg};border-color:${c.border}">
-        <span class="flavor-name" style="color:${c.text}">${f.name}${fdis?'<span style="font-size:10px;background:#FAEEDA;color:#854F0B;padding:1px 6px;border-radius:8px">distinto!</span>':''}</span>
+        <span class="flavor-name" style="color:${c.text}">${f.name}${fdis?'<span style="font-size:10px;background:#FAEEDA;color:#854F0B;padding:1px 6px;border-radius:8px;margin-left:4px">distinto!</span>':''}</span>
         <div class="flavor-scores">
           <div class="p-score">
             <span class="p-score-lbl" style="color:#993556">${ini(n1())}</span>
@@ -402,12 +385,11 @@ function updateStats() {
   `;
 }
 
-// Escuchar cambios en tiempo real desde Firestore
+// Escuchar Firestore en tiempo real — ignorar si hay un guardado nuestro pendiente
 onSnapshot(docRef, (snap) => {
-  if(localChange) return; // ignorar si el cambio lo hicimos nosotros
+  if(pendingSave) return;
   document.getElementById('loadingScreen').style.display = 'none';
   document.getElementById('mainContent').style.display = 'block';
-
   if(snap.exists()) {
     const data = snap.data();
     shops = data.shops || DEFAULT_SHOPS;
@@ -419,7 +401,6 @@ onSnapshot(docRef, (snap) => {
     nid = 4;
     save();
   }
-
   document.getElementById('av1txt').textContent = ini(n1());
   document.getElementById('av2txt').textContent = ini(n2());
   render();
