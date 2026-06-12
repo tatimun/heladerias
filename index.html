@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Guía Gastronómica 🍦🍔📋</title>
+<title> 🍦🍔📋</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -143,7 +143,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
     <div class="header-inner">
       <div>
         <div class="brand" id="brandTitle">🍦 Heladerías</div>
-        <div class="brand-sub" id="brandSub">guía de dos catadores</div>
+        <div class="brand-sub" id="brandSub">guia de dos pokemones</div>
       </div>
       <div class="names-row" id="namesRow">
         <div class="name-field">
@@ -188,7 +188,7 @@ var docRef = db.collection("app").doc("data2");
 
 var ACCENTS = { ice:'#E8594A', burger:'#1A1A1A', plans:'#6C63FF', media:'#E91E8C' };
 var META = {
-  ice:{ emoji:'🍦', title:'Heladerías', sub:'guía de dos catadores', itemsLbl:'Sabores', addLbl:'Agregar heladería', ph:{name:'Ej: Freddo', addr:'Ej: Santa Fe 1234', items:'Ej: dulce de leche, chocolate'} },
+  ice:{ emoji:'🍦', title:'Heladerías', sub:'guia de dos pokemones', itemsLbl:'Sabores', addLbl:'Agregar heladería', ph:{name:'Ej: Freddo', addr:'Ej: Santa Fe 1234', items:'Ej: dulce de leche, chocolate'} },
   burger:{ emoji:'🍔', title:'Burgers', sub:'ranking de combos', itemsLbl:'Hamburguesas', addLbl:'Agregar local', ph:{name:"Ej: McDonald's", addr:'Ej: Corrientes 3247', items:'Ej: Big Mac, Whopper'} }
 };
 
@@ -251,7 +251,7 @@ function switchTab(t){
   var accent = ACCENTS[t];
   document.getElementById('header').style.background = accent;
   var titles = { ice:'🍦 Heladerías', burger:'🍔 Burgers', plans:'📋 Planes', media:'🎬 Series & Pelis' };
-  var subs = { ice:'guía de dos catadores', burger:'ranking de combos', plans:'qué queremos hacer', media:'qué queremos ver' };
+  var subs = { ice:'guia de dos pokemones', burger:'ranking de combos', plans:'qué queremos hacer', media:'qué queremos ver' };
   document.getElementById('brandTitle').textContent = titles[t];
   document.getElementById('brandSub').textContent = subs[t];
   document.getElementById('namesRow').style.display = (t==='plans') ? 'none' : 'flex';
