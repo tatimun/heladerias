@@ -36,6 +36,9 @@
   .header-icon { font-size: 48px; line-height: 1; margin-bottom: 10px; }
   .header h1 { font-size: 26px; font-weight: 600; color: var(--text); }
   .header p { font-size: 15px; color: var(--text2); margin-top: 5px; }
+  .loading { text-align: center; padding: 3rem 0; color: var(--text2); font-size: 15px; }
+  .spinner { display: inline-block; width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: #D4537E; border-radius: 50%; animation: spin .7s linear infinite; margin-bottom: 12px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
   .names-row { display: flex; gap: 10px; margin: 1.25rem 0; }
   .nfield { flex: 1; display: flex; align-items: center; gap: 9px; background: var(--bg); border-radius: var(--radius-md); padding: 8px 13px; border: 0.5px solid var(--border); }
   .nfield input { border: none; background: transparent; font-size: 14px; font-weight: 500; color: var(--text); width: 100%; outline: none; }
@@ -99,6 +102,9 @@
   .btn-primary { padding: 9px 20px; font-size: 14px; font-weight: 600; border-radius: var(--radius-md); border: none; background: #D4537E; color: #fff; cursor: pointer; transition: opacity .15s; }
   .btn-primary:hover { opacity: .85; }
   .empty-msg { text-align: center; padding: 2.5rem 0; color: var(--text2); font-size: 15px; }
+  .sync-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #3B6D11; margin-right: 5px; vertical-align: middle; }
+  .sync-dot.saving { background: #E9902A; }
+  .sync-status { font-size: 12px; color: var(--text2); text-align: right; margin-bottom: 8px; min-height: 18px; }
   @media (max-width: 500px) {
     .form-row { grid-template-columns: 1fr; }
     .ff.full { grid-column: 1; }
@@ -116,43 +122,67 @@
     <p>Puntuaciones para dos catadores</p>
   </div>
 
-  <div class="names-row">
-    <div class="nfield">
-      <div class="av av1" id="av1txt">P1</div>
-      <input id="nameP1" value="Persona 1" oninput="updateNames()" placeholder="Tu nombre..." />
-    </div>
-    <div class="nfield">
-      <div class="av av2" id="av2txt">P2</div>
-      <input id="nameP2" value="Persona 2" oninput="updateNames()" placeholder="Tu nombre..." />
-    </div>
+  <div id="loadingScreen" class="loading">
+    <div class="spinner"></div><br>Cargando datos...
   </div>
 
-  <div class="stats-row" id="statsRow"></div>
-
-  <div class="top-bar">
-    <span class="sec-title">Heladerías</span>
-    <select class="sort-sel" id="sortSel" onchange="render()">
-      <option value="name">Ordenar: nombre</option>
-      <option value="avg">Ordenar: promedio</option>
-      <option value="flavors">Ordenar: sabores</option>
-    </select>
-  </div>
-
-  <div id="list"></div>
-
-  <div class="add-section">
-    <div class="add-title"><i class="ti ti-plus"></i> Agregar heladería</div>
-    <div class="form-row">
-      <div class="ff"><label>Nombre *</label><input id="nN" placeholder="Ej: Freddo" /></div>
-      <div class="ff"><label>Dirección *</label><input id="nA" placeholder="Ej: Av. Santa Fe 1234" /></div>
-      <div class="ff full"><label>Sabores iniciales (separados por coma)</label><input id="nF" placeholder="Ej: dulce de leche, chocolate, frutilla" /></div>
+  <div id="mainContent" style="display:none">
+    <div class="names-row">
+      <div class="nfield">
+        <div class="av av1" id="av1txt">P1</div>
+        <input id="nameP1" value="Persona 1" oninput="updateNames()" placeholder="Tu nombre..." />
+      </div>
+      <div class="nfield">
+        <div class="av av2" id="av2txt">P2</div>
+        <input id="nameP2" value="Persona 2" oninput="updateNames()" placeholder="Tu nombre..." />
+      </div>
     </div>
-    <button class="btn-primary" onclick="addShop()">Agregar heladería</button>
+
+    <div class="sync-status" id="syncStatus"><span class="sync-dot" id="syncDot"></span>Sincronizado</div>
+
+    <div class="stats-row" id="statsRow"></div>
+
+    <div class="top-bar">
+      <span class="sec-title">Heladerías</span>
+      <select class="sort-sel" id="sortSel" onchange="render()">
+        <option value="name">Ordenar: nombre</option>
+        <option value="avg">Ordenar: promedio</option>
+        <option value="flavors">Ordenar: sabores</option>
+      </select>
+    </div>
+
+    <div id="list"></div>
+
+    <div class="add-section">
+      <div class="add-title"><i class="ti ti-plus"></i> Agregar heladería</div>
+      <div class="form-row">
+        <div class="ff"><label>Nombre *</label><input id="nN" placeholder="Ej: Freddo" /></div>
+        <div class="ff"><label>Dirección *</label><input id="nA" placeholder="Ej: Av. Santa Fe 1234" /></div>
+        <div class="ff full"><label>Sabores iniciales (separados por coma)</label><input id="nF" placeholder="Ej: dulce de leche, chocolate, frutilla" /></div>
+      </div>
+      <button class="btn-primary" onclick="addShop()">Agregar heladería</button>
+    </div>
   </div>
 </div>
 
-<script>
-const FC=[
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCGGZKfQxaRSldX1VK7-qBOgyN-oDtuIfs",
+  authDomain: "heladerias-b81a6.firebaseapp.com",
+  projectId: "heladerias-b81a6",
+  storageBucket: "heladerias-b81a6.firebasestorage.app",
+  messagingSenderId: "44980890049",
+  appId: "1:44980890049:web:d92868afafd0c81c5fe740"
+};
+
+const fbApp = initializeApp(firebaseConfig);
+const db = getFirestore(fbApp);
+const docRef = doc(db, "app", "data");
+
+const FC = [
   {bg:'#FBEAF0',text:'#993556',border:'#F4C0D1'},
   {bg:'#E6F1FB',text:'#185FA5',border:'#B5D4F4'},
   {bg:'#FAEEDA',text:'#854F0B',border:'#FAC775'},
@@ -162,7 +192,7 @@ const FC=[
   {bg:'#EAF3DE',text:'#3B6D11',border:'#C0DD97'},
 ];
 
-let shops = JSON.parse(localStorage.getItem('heladerias_shops') || 'null') || [
+const DEFAULT_SHOPS = [
   {id:1,name:"Freddo",address:"Av. Santa Fe 1234, Palermo",r1:0,r2:0,flavors:[
     {name:"dulce de leche",r1:0,r2:0},{name:"chocolate amargo",r1:0,r2:0},
     {name:"crema americana",r1:0,r2:0},{name:"maracuyá",r1:0,r2:0}]},
@@ -173,56 +203,86 @@ let shops = JSON.parse(localStorage.getItem('heladerias_shops') || 'null') || [
     {name:"pistacho",r1:0,r2:0},{name:"frambuesa",r1:0,r2:0},
     {name:"limón al jengibre",r1:0,r2:0},{name:"vainilla bourbon",r1:0,r2:0}]},
 ];
-let nid = Math.max(0,...shops.map(s=>s.id)) + 1;
 
-function save() { localStorage.setItem('heladerias_shops', JSON.stringify(shops)); }
+let shops = [];
+let nid = 4;
+let saveTimer = null;
+let localChange = false;
+
 function n1() { return document.getElementById('nameP1').value || 'Persona 1'; }
 function n2() { return document.getElementById('nameP2').value || 'Persona 2'; }
 function ini(s) { return s.trim().split(/\s+/).map(w=>w[0]).join('').toUpperCase().slice(0,2) || '?'; }
-function avgStr(r1,r2) {
+function avgStr(r1, r2) {
   if(r1&&r2) return ((r1+r2)/2).toFixed(1);
   if(r1) return r1.toFixed(1);
   if(r2) return r2.toFixed(1);
   return null;
 }
 
-function updateNames() {
+function setSyncStatus(saving) {
+  const dot = document.getElementById('syncDot');
+  const lbl = document.getElementById('syncStatus');
+  dot.className = 'sync-dot' + (saving ? ' saving' : '');
+  lbl.innerHTML = `<span class="sync-dot${saving?' saving':''}"></span>${saving ? 'Guardando...' : 'Sincronizado'}`;
+}
+
+async function save() {
+  setSyncStatus(true);
+  const p1name = document.getElementById('nameP1').value || 'Persona 1';
+  const p2name = document.getElementById('nameP2').value || 'Persona 2';
+  try {
+    await setDoc(docRef, { shops, nid, p1name, p2name });
+    setSyncStatus(false);
+  } catch(e) {
+    console.error(e);
+    setSyncStatus(false);
+  }
+}
+
+function scheduleSave() {
+  localChange = true;
+  clearTimeout(saveTimer);
+  setSyncStatus(true);
+  saveTimer = setTimeout(() => { localChange = false; save(); }, 800);
+}
+
+window.updateNames = function() {
   document.getElementById('av1txt').textContent = ini(n1());
   document.getElementById('av2txt').textContent = ini(n2());
   render();
-}
+  scheduleSave();
+};
 
-function setShopR(id, p, v) {
+window.setShopR = function(id, p, v) {
   const s = shops.find(x=>x.id===id);
   if(!s) return;
   if(p===1) s.r1=v; else s.r2=v;
-  save(); render();
-}
+  render(); scheduleSave();
+};
 
-function setFlavorR(id, fi, p, v) {
+window.setFlavorR = function(id, fi, p, v) {
   const s = shops.find(x=>x.id===id);
   if(!s) return;
-  const f = s.flavors[fi];
-  if(p===1) f.r1=v; else f.r2=v;
-  save(); render();
-}
+  if(p===1) s.flavors[fi].r1=v; else s.flavors[fi].r2=v;
+  render(); scheduleSave();
+};
 
-function addFlav(id) {
+window.addFlav = function(id) {
   const inp = document.getElementById('fi_'+id);
   const v = inp.value.trim();
   if(!v) return;
   shops.find(x=>x.id===id).flavors.push({name:v,r1:0,r2:0});
   inp.value = '';
-  save(); render();
-}
+  render(); scheduleSave();
+};
 
-function removeShop(id) {
+window.removeShop = function(id) {
   if(!confirm('¿Eliminar esta heladería?')) return;
   shops = shops.filter(x=>x.id!==id);
-  save(); render();
-}
+  render(); scheduleSave();
+};
 
-function addShop() {
+window.addShop = function() {
   const name = document.getElementById('nN').value.trim();
   const addr = document.getElementById('nA').value.trim();
   const fs = document.getElementById('nF').value.trim();
@@ -232,8 +292,8 @@ function addShop() {
   document.getElementById('nN').value = '';
   document.getElementById('nA').value = '';
   document.getElementById('nF').value = '';
-  save(); render();
-}
+  render(); scheduleSave();
+};
 
 function shopStarsHtml(val, id, p) {
   let h = '';
@@ -263,15 +323,15 @@ function render() {
   }
 
   cont.innerHTML = sorted.map(s => {
-    const avg = avgStr(s.r1,s.r2);
-    const both = s.r1&&s.r2;
-    const disagree = both && Math.abs(s.r1-s.r2)>=2;
+    const avg = avgStr(s.r1, s.r2);
+    const both = s.r1 && s.r2;
+    const disagree = both && Math.abs(s.r1-s.r2) >= 2;
 
     const flavHtml = s.flavors.map((f,i) => {
-      const c = FC[i%FC.length];
-      const fa = avgStr(f.r1,f.r2);
-      const fboth = f.r1&&f.r2;
-      const fdis = fboth && Math.abs(f.r1-f.r2)>=2;
+      const c = FC[i % FC.length];
+      const fa = avgStr(f.r1, f.r2);
+      const fboth = f.r1 && f.r2;
+      const fdis = fboth && Math.abs(f.r1-f.r2) >= 2;
       return `<div class="flavor-row" style="background:${c.bg};border-color:${c.border}">
         <span class="flavor-name" style="color:${c.text}">${f.name}${fdis?'<span style="font-size:10px;background:#FAEEDA;color:#854F0B;padding:1px 6px;border-radius:8px">distinto!</span>':''}</span>
         <div class="flavor-scores">
@@ -330,7 +390,7 @@ function render() {
 
 function updateStats() {
   const total = shops.length;
-  const totalFl = shops.reduce((a,s)=>a+s.flavors.length,0);
+  const totalFl = shops.reduce((a,s)=>a+s.flavors.length, 0);
   const rated = shops.filter(s=>s.r1||s.r2);
   const best = rated.length ? rated.reduce((a,b)=>
     parseFloat(avgStr(b.r1,b.r2)||0) > parseFloat(avgStr(a.r1,a.r2)||0) ? b : a
@@ -342,7 +402,28 @@ function updateStats() {
   `;
 }
 
-render();
+// Escuchar cambios en tiempo real desde Firestore
+onSnapshot(docRef, (snap) => {
+  if(localChange) return; // ignorar si el cambio lo hicimos nosotros
+  document.getElementById('loadingScreen').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'block';
+
+  if(snap.exists()) {
+    const data = snap.data();
+    shops = data.shops || DEFAULT_SHOPS;
+    nid = data.nid || (Math.max(0,...shops.map(s=>s.id)) + 1);
+    if(data.p1name) document.getElementById('nameP1').value = data.p1name;
+    if(data.p2name) document.getElementById('nameP2').value = data.p2name;
+  } else {
+    shops = DEFAULT_SHOPS;
+    nid = 4;
+    save();
+  }
+
+  document.getElementById('av1txt').textContent = ini(n1());
+  document.getElementById('av2txt').textContent = ini(n2());
+  render();
+});
 </script>
 </body>
 </html>
